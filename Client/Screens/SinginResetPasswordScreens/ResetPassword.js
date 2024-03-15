@@ -15,6 +15,7 @@ export default function ResetPassword({ navigation, route }) {
     const code = route.params.codeToNum;
 
     const changePasswordThenLogin = async () => {
+        // console.log("change password");
         setPasswordError("");
         setConfirmPasswordError("");
 

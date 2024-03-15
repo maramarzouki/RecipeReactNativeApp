@@ -20,6 +20,7 @@ export default function Signup({ navigation }) {
     // const IP_ADDRESS = Config.IP_ADDRESS
 
     const registerUser = () => {
+        console.log("registerUser");
         setUsernameError("");
         setEmailError("");
         setPasswordError("");
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: 20,
         paddingLeft: 47, // Adjust the paddingLeft to accommodate the icon
-        padding: 10,
+        padding: 12,
         position: 'relative', // Make sure the position is relative
         zIndex: 1, // Set a higher zIndex for the TextInput
     },
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 20, // Adjust the left position to place the icon within the TextInput,
         zIndex: 2, // Set a higher zIndex for the icon
-        top: 36,
+        top: 34,
     },
     formContainer: {
         bottom: 55,

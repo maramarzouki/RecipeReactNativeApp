@@ -5,6 +5,8 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
 import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 export default function Singin({ navigation }) {
 
@@ -27,6 +29,7 @@ export default function Singin({ navigation }) {
             Axios.post(`http://${IP_ADDRESS}:3001/signin`, {
                 email, password
             }).then(response => {
+                // console.log('pressed');
                 // console.log(response.data.Token);
                 navigation.navigate('Profile')
                 // localStorage.setItem('TOKEN', response.data.Token)
@@ -89,8 +92,8 @@ const styles = StyleSheet.create({
     },
     signinText: {
         alignSelf: 'center',
-        bottom: 100,
-        fontSize: 40,
+        bottom: hp('10%'),
+        fontSize: hp('4%'),
         color: "#fff",
     },
     innerFrame: {
@@ -102,14 +105,15 @@ const styles = StyleSheet.create({
     textInput: {
         borderColor: '#D3D3D3',
         backgroundColor: '#F6F6F6',
-        width: 300,
-        borderWidth: 1,
+        width: hp('34%'),
+        // width: 300,
+        borderWidth: hp('0.05%'),
         borderStyle: 'solid',
         fontSize: 15,
         borderRadius: 20,
         marginTop: 20,
         paddingLeft: 47, // Adjust the paddingLeft to accommodate the icon
-        padding: 10,
+        padding: 12,
         position: 'relative', // Make sure the position is relative
         zIndex: 1, // Set a higher zIndex for the TextInput
     },
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 20, // Adjust the left position to place the icon within the TextInput,
         zIndex: 2, // Set a higher zIndex for the icon
-        top: 36,
+        top: 34,
     },
     formContainer: {
         bottom: 55,

@@ -12,6 +12,7 @@ export default function EnterCode({ navigation, route }) {
     const email = route.params.email;
 
     const verifyCode = async () => {
+        // console.log("verifying code...");
         if (!code) {
             setCodeError("Please enter your code before!")
         }
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         borderRadius: 20,
         paddingLeft: 47, // Adjust the paddingLeft to accommodate the icon
-        padding: 10,
+        padding: 12,
         position: 'relative', // Make sure the position is relative
         zIndex: 1, // Set a higher zIndex for the TextInput
     },
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 20, // Adjust the left position to place the icon within the TextInput,
         zIndex: 2, // Set a higher zIndex for the icon
-        top: 17,
+        top: 14,
     },
     formContainer: {
         bottom: 55,

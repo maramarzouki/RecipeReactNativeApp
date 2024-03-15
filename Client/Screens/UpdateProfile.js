@@ -42,6 +42,7 @@ export default function UpdateProfile({ navigation }) {
     };
 
     const dislayUserInfo = async () => {
+        console.log("Displaying user info");
         try {
             const token = await fetchToken();
             const decodedToken = jwtDecode(token);

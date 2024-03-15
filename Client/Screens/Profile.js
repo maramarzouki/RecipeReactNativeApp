@@ -1,13 +1,14 @@
-import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, TouchableHighlight, TouchableWithoutFeedback } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faPlus, faList, faBookmark } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
 import { useIsFocused } from '@react-navigation/native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 // Set up the polyfill for atob and btoa
 if (!global.btoa) {
@@ -18,7 +19,7 @@ if (!global.atob) {
     global.atob = decode;
 }
 
-export default function Profile({navigation}) {
+export default function Profile({ navigation }) {
 
     const isFocused = useIsFocused();
 
@@ -37,6 +38,7 @@ export default function Profile({navigation}) {
 
     const dislayUserInfo = async () => {
         try {
+            // console.log('Displaying...');
             const token = await fetchToken();
             const decodedToken = jwtDecode(token);
             const userID = decodedToken._id;
@@ -71,7 +73,7 @@ export default function Profile({navigation}) {
             <View style={styles.overlay}></View>
             <View style={styles.container}>
                 <Image
-                    source={require('../assets/profile_img.jpg')}
+                    source={require('../assets/chefavatr.jpg')}
                     style={styles.profileImage} />
 
                 <View style={styles.textContainer}>
@@ -81,10 +83,44 @@ export default function Profile({navigation}) {
 
                 <TouchableOpacity
                     style={styles.updateInfoButton}
-                    onPress={()=>{navigation.navigate('Edit profile')}}>
+                    onPress={() => { navigation.navigate('Edit profile'); console.log("edit profile"); }}>
                     <FontAwesomeIcon icon={faPen} size={15} style={styles.icon} />
                 </TouchableOpacity>
             </View>
+            <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity
+                    style={styles.recipeList}
+                    onPress={() => { navigation.navigate('My recipes') }}
+                    activeOpacity={0.9}
+                >
+                    <Image
+                        source={require('../assets/smallbackground5.jpg')}
+                        style={styles.recipeListImg}
+                    />
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <FontAwesomeIcon icon={faList} size={15} style={styles.recipeListIcon} />
+                        <Text style={styles.recipeListText}>My recipes</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.recipeList}
+                    activeOpacity={0.9}
+                >
+                    <Image
+                        source={require('../assets/smallbackground4.jpg')}
+                        style={styles.recipeListImg}
+                    />
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <FontAwesomeIcon icon={faBookmark} size={15} style={styles.recipeListIcon} />
+                        <Text style={styles.recipeListText}>Saved recipes</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+                style={styles.createRecipeButton}
+                onPress={() => { navigation.navigate('Create new recipe') }}>
+                <FontAwesomeIcon icon={faPlus} size={15} style={styles.icon} />
+            </TouchableOpacity>
         </ImageBackground>
     )
 }
@@ -93,10 +129,7 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         width: 'auto',
-        height: 250,       
-        shadowOffset: { width: 2, height: 6 },
-        shadowRadius: 6,
-        shadowOpacity: 0.2,
+        height: 250,
         elevation: 15,
     },
     imageStyle: {
@@ -117,12 +150,12 @@ const styles = StyleSheet.create({
         opacity: 0.95
     },
     updateInfoButton: {
-        borderRadius: 50,
+        borderRadius: hp(50),
         alignSelf: 'flex-end',
         backgroundColor: '#800e13',
-        padding: 15,
-        top: 120,
-        right: 15
+        padding: hp(1.7),
+        top: hp(-5.6),
+        right: hp(0),
     },
     icon: {
         color: 'white',
@@ -142,4 +175,45 @@ const styles = StyleSheet.create({
         top: 75,
         left: 55
     },
+    createRecipeButton: {
+        borderRadius: 50,
+        alignSelf: 'flex-end',
+        backgroundColor: '#800e13',
+        padding: 15,
+        top: hp(45),
+        right: 15
+    },
+    recipeList: {
+        width: hp(20),
+        borderColor: '#ddd',
+        borderWidth: hp(0.12),
+        height: hp(25),
+        backgroundColor: '#fff',
+        borderRadius: hp(5),
+        top: hp(20),
+        marginLeft: hp(2.2),
+        elevation: hp(0.3),
+    },
+    recipeListImg: {
+        width: hp(19.8),
+        height: hp(19),
+        borderTopRightRadius: hp(5),
+        borderTopLeftRadius: hp(5),
+        opacity: hp(0.1)
+    },
+    recipeListText: {
+        textAlign: 'center',
+        top: hp(1.5),
+        color: "#800e13",
+        fontSize: hp(1.9),
+        fontWeight: 'bold'
+    },
+    recipeListIcon: {
+        textAlign: 'center',
+        top: hp(2),
+        color: "#800e13",
+        fontSize: hp(1.9),
+        fontWeight: 'bold',
+        right: hp(1)
+    }
 })
