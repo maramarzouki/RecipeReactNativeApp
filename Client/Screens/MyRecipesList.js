@@ -8,6 +8,7 @@ import { IP_ADDRESS } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
+import Navbar from './Navbar'
 
 // Set up the polyfill for atob and btoa
 if (!global.btoa) {

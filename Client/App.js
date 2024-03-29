@@ -9,12 +9,14 @@ import EnterCode from './Screens/SinginResetPasswordScreens/EnterCode';
 import ResetPassword from './Screens/SinginResetPasswordScreens/ResetPassword';
 import Profile from './Screens/Profile';
 import UpdateProfile from './Screens/UpdateProfile';
-import { ToastProvider } from 'react-native-toast-message';
 import RecipeInfoForm from './Screens/CreateRecipe/RecipeInfoForm';
 import IngredientsForm from './Screens/CreateRecipe/IngredientsForm';
 import InstructionsForm from './Screens/CreateRecipe/InstructionsForm';
 import MyRecipesList from './Screens/MyRecipesList';
 import RecipeDetails from './Screens/RecipeDetails';
+import Homepage from './Screens/Homepage';
+import SearchPage from './Screens/SearchPage';
+import Navbar from './Screens/Navbar';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +67,17 @@ export default function App() {
         <Stack.Screen
           name='Recipe details'
           component={RecipeDetails} />
+        <Stack.Screen
+          name='Homepage'
+          component={Homepage}
+          options={{ headerLeft: null }} />
+        <Stack.Screen
+          name='Search'
+          component={SearchPage} />
+        <Stack.Screen
+          name='Navbar'
+          component={Navbar}
+          options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

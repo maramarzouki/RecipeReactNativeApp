@@ -90,7 +90,7 @@ export default function Profile({ navigation }) {
             <View style={{ flexDirection: 'row' }}>
                 <TouchableOpacity
                     style={styles.recipeList}
-                    onPress={() => { navigation.navigate('My recipes') }}
+                    onPress={() => { navigation.push('My recipes') }}
                     activeOpacity={0.9}
                 >
                     <Image

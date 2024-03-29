@@ -1,7 +1,5 @@
 const Recipe = require('../Models/RecipeModel');
-const Ingredient = require('../Models/IngredientModel')
-const Instruction = require('../Models/InstructionModel')
-const ObjectId = require('mongoose').Types.ObjectId;
+const levenshtein = require('js-levenshtein')
 
 // exports.create_recipe = async (req, res) => {
 //     const {
@@ -48,7 +46,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.create_recipe = async (req, res) => {
     const {
-        title, description, durationHours, durationMinutes, level, image, cuisineType, category, tags, user
+        title, description, durationHours, durationMinutes, level, image, cuisineType, category, tags, isOwnRecipe, user
     } = req.body;
 
     try {
@@ -62,6 +60,7 @@ exports.create_recipe = async (req, res) => {
             cuisineType,
             category,
             tags,
+            isOwnRecipe,
             user
         });
         res.status(200).send(newRecipe);
@@ -77,7 +76,7 @@ exports.get_recipe_details = async (req, res) => {
     } catch (error) {
         res.status(500).send({ ERROR: error.message });
     }
-} 
+}
 
 exports.update_recipe = async (req, res) => {
     const updates = res.body
@@ -93,11 +92,11 @@ exports.update_recipe = async (req, res) => {
             res.status(500).send({ err: error.message })
         }
     } catch (error) {
-        
+
     }
 }
 
-exports.get_all_recipes = async (req,res)=>{
+exports.get_all_recipes = async (req, res) => {
     try {
         const recipe = await Recipe.find({ user: req.params.userID });
         if (recipe) {
@@ -140,15 +139,46 @@ exports.searchRecipes = async (req, res) => {
     const { query } = req.query;
 
     try {
-        // Use a regular expression to perform a case-insensitive search
-        const regex = new RegExp(query, 'i');
+        const allRecipes = await Recipe.find({});
 
-        // Find recipes that match the search query
-        const searchResults = await Recipe.find({ title: regex }).populate('recipes');
+        const searchResults = allRecipes.filter(recipe => {
+            for (const key in recipe) {
+                if (typeof recipe[key] === 'string') {
+                    const attribute = recipe[key].toLowerCase();
+                    if (levenshtein(attribute, query.toLowerCase()) < 3) {
+                        return true;
+                    }
+                }
+            }
+            return false; // If no attribute is similar, exclude the recipe
+        });
 
-        res.status(200).json({ results: searchResults });
+
+        // const searchResults = allRecipes.filter(recipe => {
+        //     const title = recipe.title.toLowerCase();
+        //     return levenshtein(title, query.toLowerCase()) < 3;
+        // })
+
+        res.status(200).send(searchResults);
     } catch (error) {
         console.error('Error searching recipes:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send({ error: 'Internal Server Error' });
     }
 }
+
+// exports.searchRecipes = async (req, res) => {
+//     const { query } = req.query;
+
+//     try {
+//         // Use a regular expression to perform a case-insensitive search
+//         const regex = new RegExp(query, 'i');
+
+//         // Find recipes that match the search query
+//         const searchResults = await Recipe.find({ title: regex });
+
+//         res.status(200).json({ results: searchResults });
+//     } catch (error) {
+//         console.error('Error searching recipes:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// }

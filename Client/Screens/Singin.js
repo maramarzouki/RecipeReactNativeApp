@@ -5,7 +5,8 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
 import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Navbar from './Navbar';
 
 
 export default function Singin({ navigation }) {
@@ -31,7 +32,7 @@ export default function Singin({ navigation }) {
             }).then(response => {
                 // console.log('pressed');
                 // console.log(response.data.Token);
-                navigation.navigate('Profile')
+                navigation.navigate("Navbar")
                 // localStorage.setItem('TOKEN', response.data.Token)
                 AsyncStorage.setItem('TOKEN', response.data.Token)
             }).catch(error => {

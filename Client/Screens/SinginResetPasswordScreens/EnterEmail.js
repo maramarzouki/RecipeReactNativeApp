@@ -46,16 +46,16 @@ export default function EnterEmail({ navigation }) {
                     <View style={{paddingLeft:20, paddingRight:20}}>
                         <TouchableOpacity
                             activeOpacity={0.8}
+                            style={styles.cancelButtonStyle}
+                            onPress={()=>{navigation.navigate('SigninScreen')}}>
+                            <Text style={styles.cancelText}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
                             style={styles.buttonStyle}
                             onPress={() => { verifyEmail() }}
                         >
                             <Text style={styles.buttonText}>Next</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={0.8}
-                            style={styles.cancelButtonStyle}
-                            onPress={()=>{navigation.navigate('SigninScreen')}}>
-                            <Text style={styles.cancelText}>Cancel</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -108,10 +108,9 @@ const styles = StyleSheet.create({
     buttonStyle: {
         backgroundColor: "#800e13",
         borderRadius: 25,
-        top: 40,
         padding: 12,
         width: 100,
-        alignSelf: "flex-start",
+        alignSelf: "flex-end",
     },
     buttonText: {
         color: 'white',
@@ -132,7 +131,8 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         padding: 12,
         width: 100,
-        alignSelf: "flex-end",
-        bottom: 3
+        alignSelf: "flex-start",
+        bottom: 3,
+        top: 40
     }
 })

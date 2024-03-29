@@ -20,7 +20,7 @@ export default function Signup({ navigation }) {
     // const IP_ADDRESS = Config.IP_ADDRESS
 
     const registerUser = () => {
-        console.log("registerUser");
+        // console.log("registerUser");
         setUsernameError("");
         setEmailError("");
         setPasswordError("");

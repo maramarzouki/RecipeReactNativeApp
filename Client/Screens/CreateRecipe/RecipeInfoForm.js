@@ -109,6 +109,7 @@ const RecipeInfoForm = ({ navigation }) => {
         image: recipeImage,
         cuisineType: selectedCuisineType,
         category: selectedCategory,
+        isOwnRecipe: true,
         user: userID
       }).then(response => {
         // setRecipeID(response.data._id)
@@ -154,7 +155,7 @@ const RecipeInfoForm = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }}>
         <Text style={styles.text}>Recipe Name:</Text>
         <TextInput
           style={styles.textInput}
@@ -292,9 +293,15 @@ const RecipeInfoForm = ({ navigation }) => {
           </View>
         </Modal>
 
-        <TouchableOpacity onPress={() => { saveRecipe() }}>
-          <Text style={styles.saveButton}>Next</Text>
-        </TouchableOpacity>
+
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={() => { navigation.goBack(); }}>
+            <Text style={styles.cancelButton}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { saveRecipe() }}>
+            <Text style={styles.saveButton}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -379,10 +386,20 @@ const styles = StyleSheet.create({
     top: 10,
     width: 100,
     padding: 8,
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     borderRadius: 25,
     textAlign: 'center',
     color: 'white',
+  },
+  cancelButton: {
+    backgroundColor: '#fff',
+    top: 10,
+    width: 100,
+    padding: 8,
+    alignSelf: 'flex-start',
+    borderRadius: 25,
+    textAlign: 'center',
+    color: '#800e13',
   },
 });
 
