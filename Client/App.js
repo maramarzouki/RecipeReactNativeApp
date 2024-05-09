@@ -17,6 +17,10 @@ import RecipeDetails from './Screens/RecipeDetails';
 import Homepage from './Screens/Homepage';
 import SearchPage from './Screens/SearchPage';
 import Navbar from './Screens/Navbar';
+import RecipesByCategory from './Screens/RecipesByCategory';
+import AllCategories from './Screens/AllCategories';
+import UpdateRecipe from './Screens/UpdateRecipe';
+import MySavedRecipes from './Screens/MySavedRecipes';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +82,18 @@ export default function App() {
           name='Navbar'
           component={Navbar}
           options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Category'
+          component={RecipesByCategory} />
+        <Stack.Screen
+          name='AllCategories'
+          component={AllCategories} />
+        <Stack.Screen
+          name='Update Recipe'
+          component={UpdateRecipe} />
+        <Stack.Screen
+          name='Saved recipes'
+          component={MySavedRecipes} />
       </Stack.Navigator>
     </NavigationContainer>
   );

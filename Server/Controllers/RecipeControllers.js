@@ -79,10 +79,10 @@ exports.get_recipe_details = async (req, res) => {
 }
 
 exports.update_recipe = async (req, res) => {
-    const updates = res.body
+    const updates = req.body
     try {
         try {
-            await Recipe.findByIdAndUpdate({ _id: req.params.recipeID }, updates)
+            await Recipe.findByIdAndUpdate({ _id: req.params.recipeID }, { $set: updates })
                 .then(() => {
                     res.status(200).send("recipe updated!")
                 }).catch(error => {
@@ -99,6 +99,19 @@ exports.update_recipe = async (req, res) => {
 exports.get_all_recipes = async (req, res) => {
     try {
         const recipe = await Recipe.find({ user: req.params.userID });
+        if (recipe.length > 0) {
+            res.status(200).send(recipe)
+        } else {
+            res.status(204).send("recipes list is empty!");
+        }
+    } catch (error) {
+        res.status(500).send({ ERROR: error.message });
+    }
+}
+
+exports.get_recipes_by_category = async (req, res) => {
+    try {
+        const recipe = await Recipe.find({ category: req.params.category });
         if (recipe) {
             res.status(200).send(recipe)
         } else {
@@ -124,11 +137,11 @@ exports.delete_recipe = async (req, res) => {
 
 exports.get_app_recipes = async (req, res) => {
     try {
-        const recipe = await Recipe.find({});
-        if (recipe) {
-            res.status(200).send(recipe)
+        const recipes = await Recipe.find({});
+        if (recipes.length > 0) {
+            res.status(200).send(recipes)
         } else {
-            res.status(204).send("recipes list is empty!");
+            res.status(204).json({message:"Recipes list is empty!"});
         }
     } catch (error) {
         res.status(500).send({ ERROR: error.message });

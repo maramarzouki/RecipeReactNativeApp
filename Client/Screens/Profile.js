@@ -105,6 +105,7 @@ export default function Profile({ navigation }) {
                 <TouchableOpacity 
                     style={styles.recipeList}
                     activeOpacity={0.9}
+                    onPress={()=>{navigation.navigate('Saved recipes')}}
                 >
                     <Image
                         source={require('../assets/smallbackground4.jpg')}
@@ -116,11 +117,11 @@ export default function Profile({ navigation }) {
                     </View>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={styles.createRecipeButton}
                 onPress={() => { navigation.navigate('Create new recipe') }}>
                 <FontAwesomeIcon icon={faPlus} size={15} style={styles.icon} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </ImageBackground>
     )
 }

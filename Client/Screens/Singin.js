@@ -2,7 +2,7 @@ import { View, Text, ImageBackground, StyleSheet, TextInput, TouchableOpacity } 
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
-import Axios from 'axios';
+import axios from 'axios';
 import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -27,10 +27,10 @@ export default function Singin({ navigation }) {
         } else if (!password) {
             setPasswordError("Password cannot be empty!");
         } else {
-            Axios.post(`http://${IP_ADDRESS}:3001/signin`, {
+            axios.post(`http://${IP_ADDRESS}:3001/signin`, {
                 email, password
             }).then(response => {
-                // console.log('pressed');
+                console.log("pressed!");
                 // console.log(response.data.Token);
                 navigation.navigate("Navbar")
                 // localStorage.setItem('TOKEN', response.data.Token)

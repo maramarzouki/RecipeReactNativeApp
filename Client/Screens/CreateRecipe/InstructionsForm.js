@@ -7,6 +7,7 @@ import { IP_ADDRESS } from '@env'
 export default function InstructionsForm({ navigation, route }) {
 
   const recipeID = route.params.recipeID
+  const isToCreate = route.params.isToCreate
 
   const [instructionFields, setInstructionFields] = useState([{ number: '', details: '' }]);
 
@@ -25,12 +26,16 @@ export default function InstructionsForm({ navigation, route }) {
       await axios.post(`http://${IP_ADDRESS}:3001/addInstruction`, {
         stepNum: num, stepDesc: details, recipeID
       }).then((response) => {
-          console.log("responseeeee", response.data);
-          navigation.navigate('Profile')
+        console.log("responseeeee", response.data);
+        if (isToCreate) {
           ToastAndroid.show('Recipe created successfully!', ToastAndroid.SHORT)
+          navigation.navigate('Profile')
+        } else {
+          navigation.navigate('Recipe details', { recipeID: recipeID })
+        }
       }).catch((error) => {
-          console.log({ num, details, recipeID });
-          console.log("ERRORRRRR", error);
+        console.log({ num, details, recipeID });
+        console.log("ERRORRRRR", error);
       })
 
     }
@@ -71,7 +76,7 @@ export default function InstructionsForm({ navigation, route }) {
                   setInstructionFields(newFields);
                 }}
               />
-              <TouchableHighlight onPress={()=>{removeInstructionField(index)}}>
+              <TouchableHighlight onPress={() => { removeInstructionField(index) }}>
                 <Text>X</Text>
               </TouchableHighlight>
             </View>
@@ -91,6 +96,7 @@ export default function InstructionsForm({ navigation, route }) {
         ))}
       </ScrollView>
       <Button title='Save instructions' onPress={saveInstructions}></Button>
+      <Button title="cancel" onPress={() => { navigation.goBack() }} />
     </View>
   )
 }

@@ -11,6 +11,8 @@ import { IP_ADDRESS } from '@env'
 export default function IngredientsForm({ navigation, route }) {
 
     const recipeID = route.params.recipeID
+    const isToCreate = route.params.isToCreate
+
     const apiKey = "8f3fa11090d045108b8323a310b231fe"
 
     const [name, setName] = useState('');
@@ -58,6 +60,7 @@ export default function IngredientsForm({ navigation, route }) {
 
     const searchIngredients = async () => {
         try {
+            console.log("search");
             const response = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${searchQuery}&number=10&apiKey=${apiKey}`);
             setSearchResults(response.data.results);
             setShowModal(true);
@@ -69,7 +72,7 @@ export default function IngredientsForm({ navigation, route }) {
 
 
     const saveIngredients = async () => {
-    //   console.log("instructions");
+        //   console.log("instructions");
         for (const ingredient of ingredients) {
             // Destructure the ingredient object
             const { name, quantity, unit, optional } = ingredient;
@@ -77,7 +80,11 @@ export default function IngredientsForm({ navigation, route }) {
                 name, quantity, unit, recipeID
             }).then((response) => {
                 console.log("responseeeee", response.data);
-                navigation.navigate('Add recipe instructions', {recipeID: recipeID})
+                if (isToCreate) {
+                    navigation.navigate('Add recipe instructions', { recipeID: recipeID })
+                }else{
+                    navigation.navigate('Recipe details', { recipeID: recipeID })
+                }
             }).catch((error) => {
                 console.log({ name, quantity, unit, recipeID });
                 console.log("ERRORRRRR", error);
@@ -112,7 +119,7 @@ export default function IngredientsForm({ navigation, route }) {
                                 <Text>{item.name}</Text>
                                 <Button
                                     title="Delete this ingredient"
-                                    onPress={()=>deleteIngredientField(item.id)}
+                                    onPress={() => deleteIngredientField(item.id)}
                                 />
                             </View>
                         ) : (
@@ -194,7 +201,7 @@ export default function IngredientsForm({ navigation, route }) {
                 )}
             />
             <Button title="Save Ingredients" onPress={saveIngredients} />
-            <Button title="cancel" />
+            <Button title="cancel" onPress={()=>{navigation.goBack()}} />
         </View>
     )
 }

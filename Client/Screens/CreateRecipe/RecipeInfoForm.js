@@ -155,7 +155,6 @@ const RecipeInfoForm = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={{ flex: 1 }}>
         <Text style={styles.text}>Recipe Name:</Text>
         <TextInput
           style={styles.textInput}
@@ -294,7 +293,7 @@ const RecipeInfoForm = ({ navigation }) => {
         </Modal>
 
 
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <TouchableOpacity onPress={() => { navigation.goBack(); }}>
             <Text style={styles.cancelButton}>Cancel</Text>
           </TouchableOpacity>
@@ -302,7 +301,6 @@ const RecipeInfoForm = ({ navigation }) => {
             <Text style={styles.saveButton}>Next</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
     </View>
   );
 };

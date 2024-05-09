@@ -1,10 +1,44 @@
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
-import { faArrowRight, faEllipsis, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faArrowRight, faEllipsis, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import axios from 'axios'
+import { IP_ADDRESS } from '@env'
+import { useIsFocused } from '@react-navigation/native'
 
 export default function Homepage({ navigation }) {
+    const isFocused = useIsFocused();
+
+    const [appRecipes, setAppRecipes] = useState([])
+    const [emptyListMessage, setEmptyListMessage] = useState("")
+
+    const getAppRecipes = () => {
+        axios.get(`http://${IP_ADDRESS}:3001/getAppRecipes`)
+            .then(response => {
+                setAppRecipes(response.data)
+                // if(response.status === 200){
+                //     setAppRecipes(response.data)
+                // }else if(response.status === 204){
+                //     setEmptyListMessage("Recipes list is still empty!")
+                // }
+                console.log(response);
+                // console.log(appRecipes); 
+            }).catch(err => {
+                console.log(err.response.data);
+            })
+    }
+
+    const goToRecipesByCategory = (category) => {
+        navigation.navigate('Category', { category: category })
+    }
+
+    useEffect(() => {
+        if (isFocused) {
+            getAppRecipes()
+        }
+    }, [isFocused])
+
 
     return (
         <View style={{ backgroundColor: 'white', flex: 1 }}>
@@ -24,73 +58,112 @@ export default function Homepage({ navigation }) {
                     />
                 </TouchableOpacity>
             </View>
-            <Text style={styles.title}>Categories</Text>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={{ flexDirection: 'row', padding: hp(1.2) }}>
-                    <TouchableOpacity
-                        style={styles.category}
-                        onPress={() => { navigation.push('My recipes') }}
-                        activeOpacity={0.9}
-                    >
-                        <Image
-                            source={require('../assets/sweetsBG.jpg')}
-                            style={styles.categoriyImg}
-                        />
-                        <Text style={styles.categoryText}>Sweets</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.category}
-                        activeOpacity={0.9}
-                    >
-                        <Image
-                            source={require('../assets/pastaBG.jpg')}
-                            style={styles.categoriyImg}
-                        />
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.categoryText}>Pasta</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.category}
-                        activeOpacity={0.9}
-                    >
-                        <Image
-                            source={require('../assets/drinksBG.jpg')}
-                            style={styles.categoriyImg}
-                        />
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.categoryText}>Drinks</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.category}
-                        activeOpacity={0.9}
-                    >
-                        <Image
-                            source={require('../assets/soupBG.jpg')}
-                            style={styles.categoriyImg}
-                        />
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.categoryText}>Soups</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.category}
-                        activeOpacity={0.9}
-                    >
-                        <Image
-                            source={require('../assets/riceBG.jpg')}
-                            style={styles.categoriyImg}
-                        />
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.categoryText}>Rice</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.moreBtn}>
-                        <FontAwesomeIcon icon={faArrowRight}/>
-                    </TouchableOpacity>
+            <View>
+                <Text style={styles.title}>Categories</Text>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <View style={{ flexDirection: 'row', padding: hp(1.5) }}>
+                        <TouchableOpacity
+                            style={styles.category}
+                            onPress={() => { goToRecipesByCategory('Sweets') }}
+                            activeOpacity={0.9}
+                        >
+                            <Image
+                                source={require('../assets/sweetsBG.jpg')}
+                                style={styles.categoriyImg}
+                            />
+                            <Text style={styles.categoryText}>Sweets</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.category}
+                            activeOpacity={0.9}
+                            onPress={() => { goToRecipesByCategory('Pasta') }}
+                        >
+                            <Image
+                                source={require('../assets/pastaBG.jpg')}
+                                style={styles.categoriyImg}
+                            />
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <Text style={styles.categoryText}>Pasta</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.category}
+                            activeOpacity={0.9}
+                            onPress={() => { goToRecipesByCategory('Drinks') }}
+                        >
+                            <Image
+                                source={require('../assets/drinksBG.jpg')}
+                                style={styles.categoriyImg}
+                            />
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <Text style={styles.categoryText}>Drinks</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.category}
+                            activeOpacity={0.9}
+                            onPress={() => { goToRecipesByCategory('Soup') }}
+                        >
+                            <Image
+                                source={require('../assets/soupBG.jpg')}
+                                style={styles.categoriyImg}
+                            />
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <Text style={styles.categoryText}>Soups</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.category}
+                            activeOpacity={0.9}
+                        >
+                            <Image
+                                source={require('../assets/riceBG.jpg')}
+                                style={styles.categoriyImg}
+                                onPress={() => { goToRecipesByCategory('Rice') }}
+                            />
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <Text style={styles.categoryText}>Rice</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.moreBtn}
+                            onPress={() => { navigation.navigate('AllCategories') }}
+                        >
+                            <FontAwesomeIcon icon={faArrowRight} />
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </View>
+            <View>
+                <Text style={styles.title}>Recipes</Text>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                    {(appRecipes.length > 0) ? (
+                        appRecipes.map((item, key) => {
+                            return (
+                                <TouchableOpacity
+                                    style={styles.recipeList}
+                                    activeOpacity={0.9}
+                                    key={key}
+                                    onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
+                                > 
+                                    <Image
+                                        // source={require('../assets/smallbackground5.jpg')}
+                                        source={{ uri: item.image }}
+                                        style={styles.recipeListImg}
+                                    />
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: hp(1.7), paddingRight: hp(1.5) }}>
+                                        <Text style={styles.recipeListText}>{item.title}</Text>
+                                        <FontAwesomeIcon icon={faAngleRight} size={15} style={styles.recipeListIcon} />
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        })
+                    ) : (
+                        <Text style={{ textAlign: 'center' }}>No recipes to show!</Text>
+                    )}
                 </View>
-            </ScrollView>
+            </View>
+
         </View>
     )
 }
@@ -157,7 +230,7 @@ const styles = StyleSheet.create({
         height: hp(13),
         backgroundColor: '#fff',
         borderRadius: hp(5),
-        marginLeft: hp(0.9),
+        marginLeft: hp(0.8),
         elevation: hp(0.3),
     },
     categoriyImg: {
@@ -177,7 +250,7 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 2, height: 2 },
         textShadowRadius: 5,
     },
-    moreBtn:{
+    moreBtn: {
         borderRadius: hp(5),
         borderWidth: hp(0.14),
         borderColor: "#000",
@@ -186,5 +259,34 @@ const styles = StyleSheet.create({
         width: hp(4),
         top: hp(5),
         left: hp(1.2)
-    }
+    },
+    recipeList: {
+        width: hp(20),
+        borderColor: '#ddd',
+        borderWidth: hp(0.12),
+        height: hp(22),
+        backgroundColor: '#fff',
+        borderRadius: hp(5),
+        marginLeft: hp(2),
+        elevation: hp(0.3),
+        marginBottom: hp(1)
+    },
+    recipeListImg: {
+        width: hp(19.8),
+        height: hp(16),
+        borderTopRightRadius: hp(5),
+        borderTopLeftRadius: hp(5),
+        // opacity: hp(0.1)
+    },
+    recipeListText: {
+        top: hp(1.3),
+        fontSize: hp(1.9),
+        fontWeight: 'bold',
+    },
+    recipeListIcon: {
+        textAlign: 'center',
+        top: hp(2),
+        fontSize: hp(1.9),
+        fontWeight: 'bold',
+    },
 })

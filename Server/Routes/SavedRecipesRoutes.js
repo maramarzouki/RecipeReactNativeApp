@@ -5,6 +5,6 @@ const router = Route();
 
 router.post('/saveRecipe/:userID', savedRecipesControllers.saveRecipe);
 router.get('/getSavedRecipes/:userID', savedRecipesControllers.getAllSavedRecipes);
-router.delete('/unsaveRecipe/:userID', savedRecipesControllers.unsaveRecipe);
+router.delete('/unsaveRecipe/:userID/:recipeID', savedRecipesControllers.unsaveRecipe);
 
 module.exports = router;

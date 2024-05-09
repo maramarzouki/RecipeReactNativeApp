@@ -67,27 +67,31 @@ export default function MyRecipesList({ navigation }) {
                 <Text style={styles.backgroundImgText}>My recipes list</Text>
             </View>
             <ScrollView contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                {recipesList.map((item, index) => {
-                    return (
-                        <TouchableOpacity
-                            style={styles.recipeList}
-                            activeOpacity={0.9}
-                            key={index}
-                            onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
-                        >
-                            <Image
-                                // source={require('../assets/smallbackground5.jpg')}
-                                source={{ uri: item.image }}
-                                style={styles.recipeListImg}
-                            />
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <Text style={styles.recipeListText}>{item.title}</Text>
-                                <FontAwesomeIcon icon={faAngleRight} size={15} style={styles.recipeListIcon} />
-                            </View>
-                        </TouchableOpacity>
-                    )
-                })}
-            </ScrollView> 
+                {recipesList.length > 0 ? (
+                    recipesList.map((item, index) => {
+                        return (
+                            <TouchableOpacity
+                                style={styles.recipeList}
+                                activeOpacity={0.9}
+                                key={index}
+                                onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
+                            >
+                                <Image
+                                    // source={require('../assets/smallbackground5.jpg')}
+                                    source={{ uri: item.image }}
+                                    style={styles.recipeListImg}
+                                />
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: hp(1.5), paddingRight: hp(1) }}>
+                                    <Text style={styles.recipeListText}>{item.title}</Text>
+                                    <FontAwesomeIcon icon={faAngleRight} size={15} style={styles.recipeListIcon} />
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    })
+                ) : (
+                    <Text style={{ alignSelf: 'center' }}>No recipes to show yet!</Text>
+                )}
+            </ScrollView>
         </View>
     )
 }
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
         width: hp(20),
         borderColor: '#ddd',
         borderWidth: hp(0.12),
-        height: hp(25),
+        height: hp(22),
         backgroundColor: '#fff',
         borderRadius: hp(5),
         marginLeft: hp(2),
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
     },
     recipeListImg: {
         width: hp(19.8),
-        height: hp(19),
+        height: hp(16),
         borderTopRightRadius: hp(5),
         borderTopLeftRadius: hp(5),
         // opacity: hp(0.1)
@@ -133,13 +137,12 @@ const styles = StyleSheet.create({
         top: hp(1.3),
         fontSize: hp(1.9),
         fontWeight: 'bold',
-        right: hp(1.3)
+        // alignSelf: 'flex-start',
     },
     recipeListIcon: {
-        textAlign: 'center',
-        top: hp(2),
+        top: hp(1.9),
         fontSize: hp(1.9),
         fontWeight: 'bold',
-        left: hp(2.3)
+        // alignSelf: 'flex-end'
     },
 })

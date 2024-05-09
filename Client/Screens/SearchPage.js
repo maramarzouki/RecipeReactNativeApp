@@ -5,8 +5,12 @@ import { faSearch, faMagnifyingGlass, faPlay, faAngleRight } from '@fortawesome/
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import axios from 'axios'
 import { IP_ADDRESS } from '@env'
+import { useIsFocused } from '@react-navigation/native'
 
 export default function SearchPage({ navigation }) {
+
+  const isFocused = useIsFocused();
+
   const [query, setQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
 
@@ -20,8 +24,9 @@ export default function SearchPage({ navigation }) {
 
 
   useEffect(() => {
-  }, [searchResults, query])
-  
+    searchRecipe()
+  }, [query, isFocused])
+
 
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
@@ -31,7 +36,7 @@ export default function SearchPage({ navigation }) {
           <TextInput
             placeholder='Search'
             style={styles.searchInput}
-            clearButtonMode='always'      
+            clearButtonMode='always'
             onChangeText={(text) => { setQuery(text) }}
           />
         </View>
@@ -53,7 +58,7 @@ export default function SearchPage({ navigation }) {
                 source={{ uri: item.image }}
                 style={styles.recipeListImg}
               />
-              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: hp(1.7), paddingRight: hp(1.5) }}>
                 <Text style={styles.recipeListText}>{item.title}</Text>
                 <FontAwesomeIcon icon={faAngleRight} size={15} style={styles.recipeListIcon} />
               </View>
@@ -115,10 +120,10 @@ const styles = StyleSheet.create({
     top: hp(1.7),
   },
   recipeList: {
-    width: hp(18),
+    width: hp(20),
     borderColor: '#ddd',
     borderWidth: hp(0.12),
-    height: hp(20),
+    height: hp(22),
     backgroundColor: '#fff',
     borderRadius: hp(5),
     marginLeft: hp(2),
@@ -126,8 +131,8 @@ const styles = StyleSheet.create({
     marginBottom: hp(1)
   },
   recipeListImg: {
-    width: hp(17.8),
-    height: hp(14),
+    width: hp(19.8),
+    height: hp(16),
     borderTopRightRadius: hp(5),
     borderTopLeftRadius: hp(5),
     // opacity: hp(0.1)
@@ -136,13 +141,11 @@ const styles = StyleSheet.create({
     top: hp(1.3),
     fontSize: hp(1.9),
     fontWeight: 'bold',
-    right: hp(2.5)
   },
   recipeListIcon: {
     textAlign: 'center',
     top: hp(2),
     fontSize: hp(1.9),
     fontWeight: 'bold',
-    left: hp(3.5)
   },
 })
