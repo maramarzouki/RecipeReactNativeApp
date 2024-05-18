@@ -38,7 +38,7 @@ export default function Profile({ navigation }) {
 
     const dislayUserInfo = async () => {
         try {
-            // console.log('Displaying...');
+            console.log('Displaying...');
             const token = await fetchToken();
             const decodedToken = jwtDecode(token);
             const userID = decodedToken._id;

@@ -14,6 +14,7 @@ export default function RecipesByCategory({ navigation, route }) {
     const [recipesList, setRecipesList] = useState([])
 
     const getRecipesListByCategory = () => {
+        console.log("Getting recipes list...");
         axios.get(`http://${IP_ADDRESS}:3001/getRecipesByCategory/${category}`)
             .then(response => {
                 console.log(response.data);

@@ -8,6 +8,7 @@ const RecipeRoutes = require('./Routes/RecipeRoutes');
 const IngredientRoutes = require('./Routes/IngredientRoutes')
 const InstructionRoutes = require('./Routes/InstructionRoutes');
 const SavedRecipeRoutes = require('./Routes/SavedRecipesRoutes')
+const LiveStreamRoutes = require('./Routes/LiveStreamRoutes')
 
 mongoose.connect('mongodb://0.0.0.0:27017/RecipeMobileApp')
 
@@ -22,6 +23,7 @@ app.use('/', RecipeRoutes);
 app.use('/', IngredientRoutes);
 app.use('/', InstructionRoutes);
 app.use('/', SavedRecipeRoutes);
+app.use('/', LiveStreamRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, console.log(`Listening on port ${port}...`));

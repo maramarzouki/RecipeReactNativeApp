@@ -158,7 +158,7 @@ exports.searchRecipes = async (req, res) => {
             for (const key in recipe) {
                 if (typeof recipe[key] === 'string') {
                     const attribute = recipe[key].toLowerCase();
-                    if (levenshtein(attribute, query.toLowerCase()) < 3) {
+                    if (levenshtein(attribute, query.toLowerCase()) < 4) {
                         return true;
                     }
                 }

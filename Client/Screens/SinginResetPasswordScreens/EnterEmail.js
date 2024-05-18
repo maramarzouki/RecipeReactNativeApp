@@ -11,7 +11,7 @@ export default function EnterEmail({ navigation }) {
     const [emailError, setEmailError] = useState("");
 
     const verifyEmail = () => {
-        // console.log("verifyEmail...");
+        console.log("verifyEmail...");
         setEmailError("");
 
         if (!email) {

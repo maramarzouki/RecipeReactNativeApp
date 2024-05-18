@@ -5,18 +5,19 @@ const liveStreamSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    isLiveOn:{
-        type: Boolean,
-        default: false,
-    },
     liveID:{ 
-        type: String,
+        type: Number,
         required: true,
     },
     liveOwner:{
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
         required: true,
-    }
+    },
+    isLiveOn:{
+        type: Boolean,
+        default: false,
+    },
 })
 
 const liveStreamModel = mongoose.model('LiveStreamData', liveStreamSchema);

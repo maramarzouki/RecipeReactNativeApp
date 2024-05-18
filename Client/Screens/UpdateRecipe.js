@@ -43,7 +43,7 @@ export default function UpdateRecipe({ navigation, route }) {
     const [isCategoryPickerModalVisible, setIsCategoryPickerModalVisible] = useState(false);
 
     const getRecipeDetails = () => {
-        // console.log("Displaying");
+        console.log("Displaying");
         axios.get(`http://${IP_ADDRESS}:3001/getRecipeDetails/${recipeID}`)
             .then(response => {
                 console.log(response.data);
@@ -62,6 +62,7 @@ export default function UpdateRecipe({ navigation, route }) {
     }
 
     const updateRecipe = () => {
+        console.log("updateRecipe");
         const data = {
             title: recipeTitle,
             description:recipeDescription,

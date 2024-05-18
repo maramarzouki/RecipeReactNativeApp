@@ -21,6 +21,7 @@ import RecipesByCategory from './Screens/RecipesByCategory';
 import AllCategories from './Screens/AllCategories';
 import UpdateRecipe from './Screens/UpdateRecipe';
 import MySavedRecipes from './Screens/MySavedRecipes';
+import Livestreams from './Screens/Livestreams';
 
 const Stack = createNativeStackNavigator();
 
@@ -94,6 +95,9 @@ export default function App() {
         <Stack.Screen
           name='Saved recipes'
           component={MySavedRecipes} />
+        <Stack.Screen
+          name='Livestreams'
+          component={Livestreams} />
       </Stack.Navigator>
     </NavigationContainer>
   );

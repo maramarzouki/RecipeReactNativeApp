@@ -10,7 +10,9 @@ import UpdateProfile from './UpdateProfile';
 import { TabBarIndicator } from 'react-native-tab-view';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faGear, faHouse, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faHouse, faPlus, faSatellite, faSatelliteDish, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+// import Livestreams from '../livestream/app/livestream'; 
+// import Livestreams from './Livestreams'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -98,12 +100,12 @@ export default function Navbar({ navigation }) {
                 })}
             />
             <Tab.Screen
-                name='Profile'
-                component={Profile}
+                name='Livestream'
+                component={Livestreams}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.tabBarIcon}>
-                            <FontAwesomeIcon icon={faUser} style={{
+                            <FontAwesomeIcon icon={faSatelliteDish} style={{
                                 color: focused ? '#800e13' : "#748c94",
                                 bottom: hp(0.5)
                             }} />

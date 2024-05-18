@@ -35,7 +35,7 @@ export default function MyRecipesList({ navigation }) {
 
     const getMyRecipes = async () => {
         try {
-            // console.log('Displayin...');
+            console.log('Displayin...');
             const token = await fetchToken();
             const decodedToken = jwtDecode(token);
             const userID = decodedToken._id;

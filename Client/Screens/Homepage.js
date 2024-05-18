@@ -1,12 +1,14 @@
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
-import { faAngleRight, faArrowRight, faEllipsis, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faArrowRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import axios from 'axios'
 import { IP_ADDRESS } from '@env'
 import { useIsFocused } from '@react-navigation/native'
+// import Livestreams from '../livestream/app/livesreams'
 
+ 
 export default function Homepage({ navigation }) {
     const isFocused = useIsFocused();
 
@@ -14,6 +16,7 @@ export default function Homepage({ navigation }) {
     const [emptyListMessage, setEmptyListMessage] = useState("")
 
     const getAppRecipes = () => {
+        console.log("display");
         axios.get(`http://${IP_ADDRESS}:3001/getAppRecipes`)
             .then(response => {
                 setAppRecipes(response.data)
@@ -145,7 +148,7 @@ export default function Homepage({ navigation }) {
                                     activeOpacity={0.9}
                                     key={key}
                                     onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
-                                > 
+                                >
                                     <Image
                                         // source={require('../assets/smallbackground5.jpg')}
                                         source={{ uri: item.image }}

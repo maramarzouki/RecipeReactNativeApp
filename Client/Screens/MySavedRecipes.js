@@ -26,6 +26,7 @@ export default function MySavedRecipes({ navigation }) {
     };
 
     const getSavedRecipes = async () => {
+        console.log("Getting saved recipes...");
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const userID = decodedToken._id;

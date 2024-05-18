@@ -43,6 +43,7 @@ export default function RecipeDetails({ navigation, route }) {
     }
 
     const saveRecipe = () => {
+        console.log("Saving recipe...");
         axios.post(`http://${IP_ADDRESS}:3001/saveRecipe/${userID}`, { recipeID })
             .then((response) => {
                 if (response.status === 200) {
@@ -64,6 +65,7 @@ export default function RecipeDetails({ navigation, route }) {
     }
 
     const getRecipeDetails = async () => {
+        console.log("Getting recipe details...");
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const currentUser = decodedToken._id
@@ -92,6 +94,7 @@ export default function RecipeDetails({ navigation, route }) {
     }
 
     const getRecipeIngredients = () => {
+        console.log("getting ingredients...");
         axios.get(`http:${IP_ADDRESS}:3001/getRecipeIngredients/${recipeID}`)
             .then(response => {
                 // console.log("INGREDIENTS", response.data);
@@ -102,6 +105,7 @@ export default function RecipeDetails({ navigation, route }) {
     }
 
     const getRecipeInstructions = () => {
+        console.log("getting instructions...");
         axios.get(`http:${IP_ADDRESS}:3001/getRecipeInstructions/${recipeID}`)
             .then(response => {
                 // console.log("Instructions", response.data);

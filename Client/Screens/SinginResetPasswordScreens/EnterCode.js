@@ -12,7 +12,7 @@ export default function EnterCode({ navigation, route }) {
     const email = route.params.email;
 
     const verifyCode = async () => {
-        // console.log("verifying code...");
+        console.log("verifying code...");
         if (!code) {
             setCodeError("Please enter your code before!")
         }

@@ -49,6 +49,7 @@ const RecipeInfoForm = ({ navigation }) => {
   })();
 
   const handleGalleryClick = async () => {
+    console.log("Gallery clicked");
     try {
       const cameraResp = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
@@ -71,6 +72,7 @@ const RecipeInfoForm = ({ navigation }) => {
   };
 
   const fetchToken = async () => {
+    console.log("Fetching token...");
     try {
       const storedToken = await AsyncStorage.getItem('TOKEN');
       return storedToken;
@@ -128,6 +130,7 @@ const RecipeInfoForm = ({ navigation }) => {
 
 
   const handleSearchCuisineType = (query) => {
+    console.log("handleSearchCuisineType");
     setSearchCuisineTypeQuery(query);
     const filtered = cuisineTypes.filter((type) =>
       type.toLowerCase().includes(query.toLowerCase())
@@ -136,6 +139,7 @@ const RecipeInfoForm = ({ navigation }) => {
   };
 
   const handleSearchCategory = (query) => {
+    console.log("handleSearchCategory");
     setSearchCategoryQuery(query);
     const filtered = categories.filter((type) =>
       type.toLowerCase().includes(query.toLowerCase())
@@ -144,11 +148,13 @@ const RecipeInfoForm = ({ navigation }) => {
   };
 
   const handlePickerCuisineTypeItemPress = (item) => {
+    console.log("handlePickerCuisineTypeItemPress");
     setSelectedCuisineType(item);
     setIsCuisineTypePickerModalVisible(false);
   };
 
   const handlePickerCategoryItemPress = (item) => {
+    console.log("handlePickerCategoryItemPress");
     setSelectedCategory(item);
     setIsCategoryPickerModalVisible(false);
   };

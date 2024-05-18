@@ -29,10 +29,12 @@ export default function IngredientsForm({ navigation, route }) {
     ]);
 
     const addIngredientField = () => {
+        console.log("adding ing");
         setIngredients([...ingredients, { id: String(ingredients.length + 1), name: '', quantity: '', unit: 'tablespoon', optional: false }]);
     };
 
     const updateIngredient = (index, property, value) => {
+        console.log("updateIngredient");
         const updatedIngredients = ingredients.map((ingredient, i) => {
             if (i === index) {
                 return { ...ingredient, [property]: value };
@@ -43,6 +45,7 @@ export default function IngredientsForm({ navigation, route }) {
     };
 
     const deleteIngredientField = (id) => {
+        console.log("...");
         const updatedIngredients = ingredients.filter((ingredient) => ingredient.id !== id);
         setIngredients(updatedIngredients);
     };
@@ -59,6 +62,7 @@ export default function IngredientsForm({ navigation, route }) {
     //   };
 
     const searchIngredients = async () => {
+        console.log("searching...");
         try {
             console.log("search");
             const response = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${searchQuery}&number=10&apiKey=${apiKey}`);
@@ -72,7 +76,7 @@ export default function IngredientsForm({ navigation, route }) {
 
 
     const saveIngredients = async () => {
-        //   console.log("instructions");
+          console.log("instructions");
         for (const ingredient of ingredients) {
             // Destructure the ingredient object
             const { name, quantity, unit, optional } = ingredient;

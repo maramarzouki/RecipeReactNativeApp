@@ -13,12 +13,13 @@ export default function InstructionsForm({ navigation, route }) {
 
 
   const addInstructionField = () => {
+    console.log("addInstructionField");
     setInstructionFields([...instructionFields, { number: '', details: '' }]);
   };
 
   const saveInstructions = async () => {
     for (const instruction of instructionFields) {
-      // console.log("instructions");
+      console.log("instructions");
       // Destructure the ingredient object
       const { number, details } = instruction;
       console.log(number, details);
@@ -42,6 +43,7 @@ export default function InstructionsForm({ navigation, route }) {
   }
 
   const removeInstructionField = (index) => {
+    console.log("removeInstructionField");
     const newFields = [...instructionFields];
     newFields.splice(index, 1);
     setInstructionFields(newFields);

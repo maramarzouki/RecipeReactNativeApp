@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
 import { IP_ADDRESS } from '@env'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Signup({ navigation }) {
 
@@ -20,7 +21,7 @@ export default function Signup({ navigation }) {
     // const IP_ADDRESS = Config.IP_ADDRESS
 
     const registerUser = () => {
-        console.log("registerUser");
+        // console.log("registerUser");
         setUsernameError("");
         setEmailError("");
         setPasswordError("");
@@ -144,8 +145,8 @@ const styles = StyleSheet.create({
     },
     signupText: {
         alignSelf: 'center',
-        bottom: 100,
-        fontSize: 40,
+        bottom: hp(10),
+        fontSize: hp(4),
         color: "#fff",
     },
     innerFrame: {
@@ -157,33 +158,33 @@ const styles = StyleSheet.create({
     textInput: {
         borderColor: '#D3D3D3',
         backgroundColor: '#F6F6F6',
-        width: 300,
+        width: hp(35),
         borderWidth: 1,
         borderStyle: 'solid',
-        fontSize: 15,
-        borderRadius: 20,
-        marginTop: 20,
-        paddingLeft: 47, // Adjust the paddingLeft to accommodate the icon
-        padding: 12,
+        fontSize: hp(1.75),
+        borderRadius: hp(2.5),
+        marginTop: hp(2.3),
+        paddingLeft: hp(5.4), // Adjust the paddingLeft to accommodate the icon
+        padding: hp(1.4),
         position: 'relative', // Make sure the position is relative
         zIndex: 1, // Set a higher zIndex for the TextInput
     },
     icons: {
         color: '#000000',
         position: 'absolute',
-        left: 20, // Adjust the left position to place the icon within the TextInput,
+        left: hp(2.3), // Adjust the left position to place the icon within the TextInput,
         zIndex: 2, // Set a higher zIndex for the icon
-        top: 34,
+        top: hp(4.4),
     },
     formContainer: {
-        bottom: 55,
+        bottom: hp(6.4),
     },
     buttonStyle: {
         backgroundColor: "#800e13",
-        borderRadius: 50,
-        top: 30,
-        padding: 12,
-        width: 200,
+        borderRadius: hp(5),
+        top: hp(3.5),
+        padding: hp(1.5),
+        width: hp(20),
         alignSelf: "center",
     },
     buttonText: {
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     belowRegisterButtonText: {
         alignSelf: 'center',
         color: 'white',
-        top: 40,
+        top: hp(4.2),
         fontWeight: 'bold',
     },
     signinText: {
@@ -203,8 +204,8 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: 'red',
-        fontSize: 14,
-        marginTop: 5,
+        fontSize: hp(1.4),
+        marginTop: hp(0.5),
     },
     // inputContainer: {
     //     flexDirection: 'row',

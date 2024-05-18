@@ -19,6 +19,7 @@ export default function Singin({ navigation }) {
 
 
     const signinUser = () => {
+        
         setEmailError("");
         setPasswordError("");
 
@@ -106,34 +107,33 @@ const styles = StyleSheet.create({
     textInput: {
         borderColor: '#D3D3D3',
         backgroundColor: '#F6F6F6',
-        width: hp('34%'),
-        // width: 300,
-        borderWidth: hp('0.05%'),
+        width: hp(35),
+        borderWidth: 1,
         borderStyle: 'solid',
-        fontSize: 15,
-        borderRadius: 20,
-        marginTop: 20,
-        paddingLeft: 47, // Adjust the paddingLeft to accommodate the icon
-        padding: 12,
+        fontSize: hp(1.75),
+        borderRadius: hp(2.5),
+        marginTop: hp(2.3),
+        paddingLeft: hp(5.4), // Adjust the paddingLeft to accommodate the icon
+        padding: hp(1.4),
         position: 'relative', // Make sure the position is relative
         zIndex: 1, // Set a higher zIndex for the TextInput
     },
     icons: {
         color: '#000000',
         position: 'absolute',
-        left: 20, // Adjust the left position to place the icon within the TextInput,
+        left: hp(2.3), // Adjust the left position to place the icon within the TextInput,
         zIndex: 2, // Set a higher zIndex for the icon
-        top: 34,
+        top: hp(4.4),
     },
     formContainer: {
-        bottom: 55,
+        bottom: hp(6.4),
     },
     buttonStyle: {
         backgroundColor: "#800e13",
-        borderRadius: 50,
-        top: 40,
-        padding: 12,
-        width: 200,
+        borderRadius: hp(5),
+        top: hp(3.5),
+        padding: hp(1.5),
+        width: hp(20),
         alignSelf: "center",
     },
     buttonText: {
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     belowSigninButtonText: {
         alignSelf: 'center',
         color: 'white',
-        top: 50,
+        top: hp(4.2),
         fontWeight: 'bold',
     },
     signupText: {
@@ -153,14 +153,14 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: 'red',
-        fontSize: 14,
-        marginTop: 5,
+        fontSize: hp(1.4),
+        marginTop: hp(0.5),
     },
     forgotPasswordText: {
-        color: '#800e13',
+        color: '#bf4342',
         textDecorationLine: 'underline',
         fontWeight: 'bold',
-        left: 7,
-        top: 7
+        left: hp(0.7),
+        top: hp(0.7)
     },
 })
