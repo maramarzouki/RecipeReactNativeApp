@@ -22,6 +22,8 @@ import AllCategories from './Screens/AllCategories';
 import UpdateRecipe from './Screens/UpdateRecipe';
 import MySavedRecipes from './Screens/MySavedRecipes';
 import Livestreams from './Screens/Livestreams';
+import LiveStreamRoom from './Screens/LiveStreamRoom';
+import LiveStreamWatch from './Screens/LiveStreamWatch';
 
 const Stack = createNativeStackNavigator();
 
@@ -98,6 +100,14 @@ export default function App() {
         <Stack.Screen
           name='Livestreams'
           component={Livestreams} />
+        <Stack.Screen
+          name='Livestream room'
+          component={LiveStreamRoom} 
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Livestream watch room'
+          component={LiveStreamWatch} 
+          options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

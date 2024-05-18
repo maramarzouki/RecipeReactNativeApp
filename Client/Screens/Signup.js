@@ -21,7 +21,7 @@ export default function Signup({ navigation }) {
     // const IP_ADDRESS = Config.IP_ADDRESS
 
     const registerUser = () => {
-        // console.log("registerUser");
+        console.log("registerUser");
         setUsernameError("");
         setEmailError("");
         setPasswordError("");
@@ -126,7 +126,7 @@ export default function Signup({ navigation }) {
                     <TouchableOpacity
                         activeOpacity={0.8}
                         style={styles.buttonStyle}
-                        onPress={() => registerUser()}
+                        onPress={registerUser}
                     >
                         <Text style={styles.buttonText}>Register</Text>
                     </TouchableOpacity>

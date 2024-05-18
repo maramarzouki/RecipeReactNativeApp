@@ -12,7 +12,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faGear, faHouse, faPlus, faSatellite, faSatelliteDish, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 // import Livestreams from '../livestream/app/livestream'; 
-// import Livestreams from './Livestreams'; 
+import Livestreams from './Livestreams'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -112,7 +112,7 @@ export default function Navbar({ navigation }) {
                             <Text style={{
                                 color: focused ? '#800e13' : "#748c94",
                                 fontSize: hp(1.3)
-                            }}>Profile</Text>
+                            }}>Livestream</Text>
                         </View>
                     )
                 }}

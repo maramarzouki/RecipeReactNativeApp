@@ -1,8 +1,19 @@
+// require('dotenv').config();
 const User = require('../Models/UserModel')
 const jwt = require('jsonwebtoken');
 const prvKey = "prvkeyforrecipeappusertoken"
 const bcrypt = require('bcrypt');
 const { sendCode } = require('./nodemailer');
+const stream_chat = require('stream-chat')
+
+// dotenv.config();
+
+// const { STREAM_API_KEY, STREAM_API_SECRET } = process.env;
+
+const STREAM_API_KEY = "ya7d29hmmd9m"
+const STREAM_API_SECRET = "ac8trwcegut625s6xg5zkugdtgcbm9zr729877vzye5xub6n74qzsjq89f49dc9c"
+
+const client = stream_chat.StreamChat.getInstance(STREAM_API_KEY, STREAM_API_SECRET)
 
 const create_token = (_id) => {
     return jwt.sign({ _id }, prvKey);
@@ -14,8 +25,14 @@ exports.create_account = async (req, res) => {
     try {
         const newUser = await User.create_account(username, email, password);
         const token = create_token(newUser._id);
-        res.status(201).send({ Token: token, new_user: newUser });
+        const id = newUser._id.toString();
+        await client.upsertUser({
+            id, email, name: username
+        })
+        const stream_token = client.createToken(id);
+        res.status(201).send({ Token: token, new_user: newUser, streamUserToken: stream_token, streamUserData: { id, email, username } });
     } catch (err) {
+        console.log(STREAM_API_KEY, STREAM_API_SECRET);
         res.status(500).send({ ERROR: err.message });
     }
 }
@@ -179,5 +196,25 @@ exports.update_user_information = async (req, res) => {
     } catch (error) {
         res.status(500).send({ ERROR: error.message });
         console.log(error.message);
+    }
+}
+
+exports.login_user_to_stream = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        const id = user._id.toString();
+        console.log(id);
+        const token = client.createToken(id);
+    
+        return res.status(200).json({
+            token,
+            user: {
+                id: user.id,
+                email: user.email
+            }
+        });
+    } catch (error) {
+        res.status(500).json(error.message);
     }
 }

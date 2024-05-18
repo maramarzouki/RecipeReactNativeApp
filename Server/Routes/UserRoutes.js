@@ -11,5 +11,6 @@ router.put('/updateUserDetails/:userID', userControllers.update_user_information
 router.post('/verifyEmailBeforeResetPassword', userControllers.forgot_password)
 router.post('/verifyResetPasswordCode', userControllers.verify_reset_password_code)
 router.put('/resetPassword', userControllers.reset_password_from_signin)
+router.post('/loginUserToStream', userControllers.login_user_to_stream);
 
 module.exports = router;
