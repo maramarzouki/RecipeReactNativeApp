@@ -24,91 +24,94 @@ import MySavedRecipes from './Screens/MySavedRecipes';
 import Livestreams from './Screens/Livestreams';
 import LiveStreamRoom from './Screens/LiveStreamRoom';
 import LiveStreamWatch from './Screens/LiveStreamWatch';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function App() { 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='SignupScreen'>
-        <Stack.Screen
-          name='SignupScreen'
-          component={Signup}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='SigninScreen'
-          component={Singin}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='EnterEmailScreen'
-          component={EnterEmail}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='EnterCodeScreen'
-          component={EnterCode}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='ResetPasswordScreen'
-          component={ResetPassword}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='Profile'
-          component={Profile} />
-        <Stack.Screen
-          name='Edit profile'
-          component={UpdateProfile} />
-        <Stack.Screen
-          name='Create new recipe'
-          component={RecipeInfoForm} />
-        <Stack.Screen
-          name='Add recipe ingredients'
-          component={IngredientsForm}
-          options={{ headerShown: true }} />
-        <Stack.Screen
-          name='Add recipe instructions'
-          component={InstructionsForm}
-          options={{ headerShown: true }} />
-        <Stack.Screen
-          name='My recipes'
-          component={MyRecipesList} />
-        <Stack.Screen
-          name='Recipe details'
-          component={RecipeDetails} />
-        <Stack.Screen
-          name='Homepage'
-          component={Homepage}
-          options={{ headerLeft: null }} />
-        <Stack.Screen
-          name='Search'
-          component={SearchPage} />
-        <Stack.Screen
-          name='Navbar'
-          component={Navbar}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='Category'
-          component={RecipesByCategory} />
-        <Stack.Screen
-          name='AllCategories'
-          component={AllCategories} />
-        <Stack.Screen
-          name='Update Recipe'
-          component={UpdateRecipe} />
-        <Stack.Screen
-          name='Saved recipes'
-          component={MySavedRecipes} />
-        <Stack.Screen
-          name='Livestreams'
-          component={Livestreams} />
-        <Stack.Screen
-          name='Livestream room'
-          component={LiveStreamRoom} 
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name='Livestream watch room'
-          component={LiveStreamWatch} 
-          options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='SignupScreen'>
+          <Stack.Screen
+            name='SignupScreen'
+            component={Signup}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='SigninScreen'
+            component={Singin}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='EnterEmailScreen'
+            component={EnterEmail}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='EnterCodeScreen'
+            component={EnterCode}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='ResetPasswordScreen'
+            component={ResetPassword}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='Profile'
+            component={Profile} />
+          <Stack.Screen
+            name='Edit profile'
+            component={UpdateProfile} />
+          <Stack.Screen
+            name='Create new recipe'
+            component={RecipeInfoForm} />
+          <Stack.Screen
+            name='Add recipe ingredients'
+            component={IngredientsForm}
+            options={{ headerShown: true }} />
+          <Stack.Screen
+            name='Add recipe instructions'
+            component={InstructionsForm}
+            options={{ headerShown: true }} />
+          <Stack.Screen
+            name='My recipes'
+            component={MyRecipesList} />
+          <Stack.Screen
+            name='Recipe details'
+            component={RecipeDetails} />
+          <Stack.Screen
+            name='Homepage'
+            component={Homepage}
+            options={{ headerLeft: null }} />
+          <Stack.Screen
+            name='Search'
+            component={SearchPage} />
+          <Stack.Screen
+            name='Navbar'
+            component={Navbar}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='Category'
+            component={RecipesByCategory} />
+          <Stack.Screen
+            name='AllCategories'
+            component={AllCategories} />
+          <Stack.Screen
+            name='Update Recipe'
+            component={UpdateRecipe} />
+          <Stack.Screen
+            name='Saved recipes'
+            component={MySavedRecipes} />
+          <Stack.Screen
+            name='Livestreams'
+            component={Livestreams} />
+          <Stack.Screen
+            name='Livestream room'
+            component={LiveStreamRoom}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='Livestream watch room'
+            component={LiveStreamWatch}
+            options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }

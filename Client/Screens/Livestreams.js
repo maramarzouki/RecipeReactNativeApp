@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
-import axios from 'axios';
+import axios from 'axios'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; 
 import { IP_ADDRESS } from '@env'
 import { login } from '../service/AuthService';
 import * as SecureStore from "expo-secure-store"

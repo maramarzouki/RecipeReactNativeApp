@@ -40,9 +40,9 @@ export default function LiveStreamWatch({navigation, route}) {
     return (
       <View style={styles.container}>
         <Text>yo</Text>
-        {/* <StreamCall call={call}>
+        <StreamCall call={call}>
           <ViewerLivestream onLeaveStreamHandler={goToHomeScreen} />
-        </StreamCall> */}
+        </StreamCall>
       </View>
     )
   }

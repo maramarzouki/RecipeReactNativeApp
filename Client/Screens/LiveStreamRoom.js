@@ -115,14 +115,14 @@ export default function LiveStreamRoom({ navigation, route }) {
 
     return (
         <StreamVideo client={client}>
-            {/* <OverlayProvider> */}
+            <OverlayProvider>
                 <StreamCall call={call}>
                     <View style={styles.videoContainer}>
                         <HostLivestream onEndStreamHandler={leaveLivestream} />
                     </View>
                 </StreamCall>
                 {/* <Toast/> */}
-            {/* </OverlayProvider> */}
+            </OverlayProvider>
         </StreamVideo>
     )
 }
