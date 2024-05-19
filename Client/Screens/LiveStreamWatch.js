@@ -37,8 +37,9 @@ export default function LiveStreamWatch({ navigation, route }) {
 
   const goToHomeScreen = async () => {
     navigation.goBack();
-  }
+  } 
 
+  if (!call) return null;
   return (
       <View style={styles.container}>
         <StreamCall call={call}>

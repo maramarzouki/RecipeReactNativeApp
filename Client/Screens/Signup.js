@@ -1,9 +1,10 @@
 import { View, Text, ImageBackground, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Signup({ navigation }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
@@ -20,6 +21,10 @@ export default function Signup({ navigation }) {
 
     // const IP_ADDRESS = Config.IP_ADDRESS
 
+    // useEffect(()=>{
+    //     AsyncStorage.removeItem('authState');
+    //     AsyncStorage.removeItem('initialized');
+    // })
     const registerUser = () => {
         console.log("registerUser");
         setUsernameError("");

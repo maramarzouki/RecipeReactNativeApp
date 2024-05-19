@@ -26,93 +26,171 @@ import LiveStreamRoom from './Screens/LiveStreamRoom';
 import LiveStreamWatch from './Screens/LiveStreamWatch';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { OverlayProvider } from 'stream-chat-expo';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-native-sdk';
+import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from './Screens/AuthContext';
+import { AuthProvider } from './Screens/AuthContext';
+import { Slot } from 'expo-router'
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+function InitialLayout() {
+
+  const [client, setClient] = useState(null);
+  const STREAM_KEY = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
+  // const navigation = useNavigation();
+  const navigationContainerRef = useRef();
+
+  const { authState, initialized } = useContext(AuthContext);
+
+
+  // Navigate the user to the correct page based on their authentication state
+  // useEffect(() => {
+  //   if (!initialized) return;
+
+  //   if (authState?.authenticated) {
+  //     if(navigationContainerRef.current){
+  //       navigationContainerRef.current.navigate("Livestreams");
+  //     } // Replace with the name of your inside screen
+  //   } else {
+  //     client?.disconnectUser(); 
+  //     if(navigationContainerRef.current){
+  //       navigationContainerRef.current.navigate("SignupScreen");
+  //     }
+  //     // navigation.navigate(); // Replace with the name of your login screen
+  //   }
+  // }, [initialized, authState]);
+
+  // Initialize the StreamVideoClient when the user is authenticated
+  useEffect(() => {
+    if (authState?.authenticated && authState.token) {
+      const user = { id: authState.user_id };
+
+      try {
+        const client = new StreamVideoClient({ apiKey: STREAM_KEY, user, token: authState.token });
+        setClient(client);
+      } catch (e) {
+        console.log('Error creating client: ', e);
+      }
+    }
+    console.log("clllllllll", client);
+    console.log("authState", authState);
+  }, [authState]);
+
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='SignupScreen'>
-            <Stack.Screen
-              name='SignupScreen'
-              component={Signup}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='SigninScreen'
-              component={Singin}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='EnterEmailScreen'
-              component={EnterEmail}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='EnterCodeScreen'
-              component={EnterCode}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='ResetPasswordScreen'
-              component={ResetPassword}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='Profile'
-              component={Profile} />
-            <Stack.Screen
-              name='Edit profile'
-              component={UpdateProfile} />
-            <Stack.Screen
-              name='Create new recipe'
-              component={RecipeInfoForm} />
-            <Stack.Screen
-              name='Add recipe ingredients'
-              component={IngredientsForm}
-              options={{ headerShown: true }} />
-            <Stack.Screen
-              name='Add recipe instructions'
-              component={InstructionsForm}
-              options={{ headerShown: true }} />
-            <Stack.Screen
-              name='My recipes'
-              component={MyRecipesList} />
-            <Stack.Screen
-              name='Recipe details'
-              component={RecipeDetails} />
-            <Stack.Screen
-              name='Homepage'
-              component={Homepage}
-              options={{ headerLeft: null }} />
-            <Stack.Screen
-              name='Search'
-              component={SearchPage} />
-            <Stack.Screen
-              name='Navbar'
-              component={Navbar}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='Category'
-              component={RecipesByCategory} />
-            <Stack.Screen
-              name='AllCategories'
-              component={AllCategories} />
-            <Stack.Screen
-              name='Update Recipe'
-              component={UpdateRecipe} />
-            <Stack.Screen
-              name='Saved recipes'
-              component={MySavedRecipes} />
-            <Stack.Screen
-              name='Livestreams'
-              component={Livestreams} />
-            <Stack.Screen
-              name='Livestream room'
-              component={LiveStreamRoom}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='Livestream watch room'
-              component={LiveStreamWatch}
-              options={{ headerShown: false }} />
-          </Stack.Navigator>
-        </NavigationContainer>
-    </GestureHandlerRootView>
+    <NavigationContainer>
+      {client !== undefined && (
+
+        <Stack.Navigator initialRouteName='SignupScreen'>
+          <Stack.Screen
+            name='Initial Screen'
+            component={InitialLayout}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='SignupScreen'
+            component={Signup}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='SigninScreen'
+            component={Singin}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='EnterEmailScreen'
+            component={EnterEmail}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='EnterCodeScreen'
+            component={EnterCode}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='ResetPasswordScreen'
+            component={ResetPassword}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='Profile'
+            component={Profile} />
+          <Stack.Screen
+            name='Edit profile'
+            component={UpdateProfile} />
+          <Stack.Screen
+            name='Create new recipe'
+            component={RecipeInfoForm} />
+          <Stack.Screen
+            name='Add recipe ingredients'
+            component={IngredientsForm}
+            options={{ headerShown: true }} />
+          <Stack.Screen
+            name='Add recipe instructions'
+            component={InstructionsForm}
+            options={{ headerShown: true }} />
+          <Stack.Screen
+            name='My recipes'
+            component={MyRecipesList} />
+          <Stack.Screen
+            name='Recipe details'
+            component={RecipeDetails} />
+          <Stack.Screen
+            name='Homepage'
+            component={Homepage}
+            options={{ headerLeft: null }} />
+          <Stack.Screen
+            name='Search'
+            component={SearchPage} />
+          <Stack.Screen
+            name='Navbar'
+            component={Navbar}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='Category'
+            component={RecipesByCategory} />
+          <Stack.Screen
+            name='AllCategories'
+            component={AllCategories} />
+          <Stack.Screen
+            name='Update Recipe'
+            component={UpdateRecipe} />
+          <Stack.Screen
+            name='Saved recipes'
+            component={MySavedRecipes} />
+          <Stack.Screen
+            name='Livestreams'
+            component={Livestreams} />
+          <Stack.Screen
+            name='Livestream room'
+            component={LiveStreamRoom}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name='Livestream watch room'
+            component={LiveStreamWatch}
+            options={{ headerShown: false }} />
+        </Stack.Navigator>
+
+      )}
+      {client && (
+        <StreamVideo client={client}>
+          <OverlayProvider>
+            {/* <Livestreams /> */}
+            <Slot />
+            {/* <LiveStreamRoom /> */}
+            <Toast />
+          </OverlayProvider>
+        </StreamVideo>
+      )}
+    </NavigationContainer>
   );
 }
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <InitialLayout />
+      </GestureHandlerRootView>
+    </AuthProvider>
+  );
+};
+
+export default App;

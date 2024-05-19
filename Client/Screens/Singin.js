@@ -1,16 +1,18 @@
 import { View, Text, ImageBackground, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Navbar from './Navbar';
+import { AuthContext } from './AuthContext';
 
 
 export default function Singin({ navigation }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
-
+    const { loginForStream, authState } = useContext(AuthContext);
+  
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -30,9 +32,11 @@ export default function Singin({ navigation }) {
         } else {
             axios.post(`http://${IP_ADDRESS}:3001/signin`, {
                 email, password
-            }).then(response => {
+            }).then(async (response) => {
                 console.log("pressed!");
                 // console.log(response.data.Token);
+                // await loginForStream(email)
+
                 navigation.navigate("Navbar")
                 // localStorage.setItem('TOKEN', response.data.Token)
                 AsyncStorage.setItem('TOKEN', response.data.Token)

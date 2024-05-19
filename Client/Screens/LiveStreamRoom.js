@@ -1,18 +1,22 @@
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Share } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     Call,
     StreamVideoClient,
     User,
     StreamVideo,
     StreamCall,
-    HostLivestream
+    HostLivestream,
+    useStreamVideoClient 
 } from '@stream-io/video-react-native-sdk';
 import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { OverlayProvider } from 'stream-chat-expo';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import LiveStreamWatch from './LiveStreamWatch';
+import { AuthContext } from './AuthContext';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -20,50 +24,57 @@ const HEIGHT = Dimensions.get('window').height;
 export default function LiveStreamRoom({ navigation, route }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
-    const callId = route.params.id;
-    const liveId = route.params.liveId;
+  const { authState, initialized } = useContext(AuthContext);
 
-    const apiKey = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
-    const userId = authState.user_id;
-    const token = authState.token;
-    const user = { id: userId };
 
-    const [authState, setAuthState] = useState({
-        token: null,
-        authenticated: null,
-        user_id: null
-    })
+    // const callId = route.params.id;
+    // const liveId = route.params.liveId;
+    const client = useStreamVideoClient()
+ 
+    // const [authState, setAuthState] = useState({
+    //     token: null, 
+    //     authenticated: null,
+    //     user_id: null
+    // })
 
-    const fetchAuthState = async () => {
-        try {
-            const storedAuthState = await AsyncStorage.getItem('authState');
-            if (storedAuthState) {
-                const parsedAuthState = JSON.parse(storedAuthState);
-                setAuthState(parsedAuthState)
-            }
-        } catch (error) {
-            console.error('Error fetching email:', error);
-            return null;
-        }
-    };
+    // const apiKey = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
+    // const userId = authState.user_id;
+    // const token = authState.token;
+    // const user = { id: userId };
+
+    // const fetchAuthState = async () => {
+    //     try {
+    //         const storedAuthState = await AsyncStorage.getItem('authState');
+    //         if (storedAuthState) {
+    //             const parsedAuthState = JSON.parse(storedAuthState);
+    //             setAuthState(parsedAuthState)
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching email:', error);
+    //         return null;
+    //     }
+    // };
 
     useEffect(() => {
-        fetchAuthState();
-        console.log("authState", authState);
+        console.log("clientttttttttt", client);
+        console.log("authStateeeeeeee", authState);
+        // fetchAuthState();
+        // console.log("authStateeeeee", authState);  
     }, [])
 
-    const client = new StreamVideoClient({ apiKey, user, token });
-    const call = client.call('livestream', callId);
-    call.join({ create: true });
 
-    const leaveLivestream = () => {
-        axios.delete(`http://${IP_ADDRESS}:3001/deleteLive/${liveId}`)
-            .then((res) => {
-                navigation.goBack();
-            }).catch((err) => {
-                console.log(err);
-            })
-    }
+    // const client = new StreamVideoClient({ apiKey, user, token });
+    // const call = client.call('livestream', callId);
+    // call.join({ create: true });
+
+    // const leaveLivestream = () => {
+    //     axios.delete(`http://${IP_ADDRESS}:3001/deleteLive/${liveId}`)
+    //         .then((res) => {
+    //             navigation.goBack(); 
+    //         }).catch((err) => {
+    //             console.log(err);
+    //         })
+    // }
 
     // const shareMeeting = async () => {
     //     Share.share({
@@ -112,22 +123,15 @@ export default function LiveStreamRoom({ navigation, route }) {
     //       unsubscribe()
     //     }
     //   }, [])
-
+  
 
 
     return (
-        // <OverlayProvider>
-        <StreamVideo client={client}>
-            <OverlayProvider>
-                <StreamCall call={call}>
-                    <View style={styles.videoContainer}>
-                        <HostLivestream onEndStreamHandler={leaveLivestream} />
-                    </View>
-                </StreamCall> 
-                <Toast />
-            </OverlayProvider>
-        </StreamVideo>
-        // </OverlayProvider>
+                    // <StreamCall call={call}>
+                        <View style={styles.videoContainer}>
+                            {/* <HostLivestream onEndStreamHandler={leaveLivestream} /> */}
+                        </View>
+                    // </StreamCall>
     )
 }
 

@@ -1,29 +1,40 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
-import axios from 'axios'; 
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from 'jwt-decode'; 
-import { login } from '../service/AuthService'; 
+import { jwtDecode } from 'jwt-decode';
+import { login } from '../service/AuthService';
 import * as SecureStore from "expo-secure-store"
 import { useFocusEffect } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StreamVideoClient, StreamVideo, useStreamVideoClient } from '@stream-io/video-react-native-sdk';
+import { OverlayProvider } from 'stream-chat-expo';
+import Toast from 'react-native-toast-message';
+import { AuthContext } from './AuthContext';
+
 
 export default function Livestreams({ navigation }) {
-    
-    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
-    const TOKEN_KEY = "1"
- 
-    const [currentLives, setCurrentLives] = useState([]);
-    const [visible, setVisible] = useState(false); 
-    const [liveTitle, setLiveTitle] = useState("")
 
-    const [authState, setAuthState] = useState({ 
-        token: null,
-        authenticated: null,
-        user_id: null
-    })
-    const [initialized, setInitialized] = useState(false)
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+    const { loginForStream, authState } = useContext(AuthContext);
+    // const TOKEN_KEY = "1"
+    // const apiKey = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
+
+    const [currentLives, setCurrentLives] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [liveTitle, setLiveTitle] = useState("")
+    // const [client, setClient] = useState(null)
+    const [email, setEmail] = useState(null)
+    // const client = useStreamVideoClient()
+
+    // const [authState, setAuthState] = useState({
+    //     token: null,
+    //     authenticated: null,
+    //     user_id: null
+    // })
+    // const [initialized, setInitialized] = useState(false)
 
     const fetchToken = async () => {
         try {
@@ -64,7 +75,7 @@ export default function Livestreams({ navigation }) {
                 })
         } catch (error) {
             console.log(error);
-        } 
+        }
 
     };
 
@@ -87,65 +98,109 @@ export default function Livestreams({ navigation }) {
 
     };
 
-    const fetchEmail = async () => { 
+    const fetchEmail = async () => {
         try {
             const storedEmail = await AsyncStorage.getItem('email');
             return storedEmail;
         } catch (error) {
             console.error('Error fetching email:', error);
-            return null; 
+            return null;
         }
     };
 
-    const loadStreamToken = async () => {
-        const data = await SecureStore.getItemAsync(TOKEN_KEY);
-        // console.log("dataaaaaaa", data);
+    // const loadStreamToken = async () => {
+    //     const data = await SecureStore.getItemAsync(TOKEN_KEY);
+    //     // console.log("dataaaaaaa", data);
 
-        if (data) {
-            const object = JSON.parse(data);
-            // console.log("token", object.data.token);
-            AsyncStorage.removeItem('authState');
+    //     if (data) {
+    //         const object = JSON.parse(data);
+    //         // console.log("token", object.data.token);
+    //         AsyncStorage.removeItem('authState');
 
-            // Set our context state
-            setAuthState({
-                token: object.data.token,
-                authenticated: true,
-                user_id: object.data.user.id,
-            });
-            setInitialized(true);
-            AsyncStorage.setItem('authState', JSON.stringify(authState));
-            //   console.log("authstate",authState); 
-        }
-        console.log("authState", authState);
+    //         // Set our context state
+    //         setAuthState({
+    //             token: object.data.token,
+    //             authenticated: true,
+    //             user_id: object.data.user.id,
+    //         });
+    //         setInitialized(true);
+    //         //   console.log("authstate",authState); 
+    //     }
+    //     console.log("authState", authState);
 
-    };
+    // };
 
-    const loginForStream = async () => {
-        const email = await fetchEmail();
-        console.log("email", email);
-        try {
-            await login(email, email)
-                .then(result => {
-                    console.log("done");
-                    loadStreamToken();
-                })
-        } catch (error) {
-            Alert.alert('Error', 'Could not log in');
-            console.log(e);
-        }
-    }
- 
+    // const loginForStream = async () => {
+    //     const email = await fetchEmail();
+    //     console.log("email", email);
+    //     try {
+    //         await login(email, email)
+    //             .then(result => {
+    //                 console.log("done");
+    //                 loadStreamToken();
+    //                 console.log(client);
+    //             })
+    //     } catch (error) {
+    //         Alert.alert('Error', 'Could not log in');
+    //         console.log(e);
+    //     }
+    // }
+
+    // useEffect(() => {  
+    //     if (authState.token && authState.user_id) {
+    //         const initializeClient = async () => {
+    //             try {
+    //                 const user = { id: authState.user_id };
+    //                 const client = new StreamVideoClient({ apiKey, user, token: authState.token });
+    //                 setClient(client);
+    //             } catch (error) {
+    //                 console.log("Error initializing client or joining call:", error);
+    //             }
+    //         };
+    //         initializeClient();
+    //     }
+    // }, [authState]); 
+
+    // useEffect(()=>{
+    //     AsyncStorage.setItem('authState', JSON.stringify(authState));
+    //     AsyncStorage.setItem('initialized', JSON.stringify(initialized));
+    // })
+
+    useEffect(() => {
+        const email = fetchEmail();
+        setEmail(email)
+
+    }, [])
     useFocusEffect(
         useCallback(() => {
-            loginForStream();
+            loginForStream(email);
             getLives();
-        }, []) 
+        }, [])
     );
 
-    const watchStream = (id) => {
-        navigation.navigate('Livestream watch room', {id: id});
-    }
-      
+    // useEffect(() => {
+    //     if (authState.token && authState.user_id) {
+    //         const initializeClient = async () => {
+    //             try {
+    //                 const user = { id: authState.user_id };
+    //                 const client = new StreamVideoClient({ apiKey, user:authState.user_id, token: authState.token });
+    //                 setClient(client);
+    //                 console.log('====================================');
+    //                 console.log("cliennnnnttttt", client); 
+    //                 console.log('====================================');
+    //             } catch (error) {
+    //                 console.log("Error initializing client or joining call:", error);
+    //             }
+    //         };
+    //         initializeClient();
+    //     }
+    // }, [authState]);
+
+    const watchStream = async (id) => {
+        navigation.navigate('Livestream watch room');
+    };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.buttonsView}>
@@ -160,16 +215,16 @@ export default function Livestreams({ navigation }) {
             {currentLives.length > 0 ? (
                 currentLives.map((item, key) => {
                     return (
-                        <TouchableOpacity key={key} style={styles.card} onPress={()=>watchStream(item.liveID)}>
+                        <TouchableOpacity key={key} style={styles.card} onPress={() => watchStream(item.liveID)}>
                             <View style={styles.redCircle} />
                             <Text style={styles.cardTitle}>{item.liveTitle}</Text>
                             <Text style={styles.cardOwner}><Text style={{ fontWeight: 'bold' }}>Host:</Text> {item.liveOwner.username}</Text>
                         </TouchableOpacity>
                     )
                 })
-            ) : (  
+            ) : (
                 <Text>No lives for now!</Text>
-            )} 
+            )}
             <View style={styles.dialogContainer}>
                 {/* <Bu title="Show dialog" onPress={showDialog} /> */}
                 <Dialog.Container visible={visible}>
@@ -189,13 +244,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff"
     },
     buttonsView: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         justifyContent: "flex-end",
         marginBottom: hp(2)
     },
     buttonsStyle: {
         backgroundColor: "#800e13",
-        borderRadius: hp(1), 
+        borderRadius: hp(1),
         padding: hp(1),
         width: hp(10),
         alignItems: "center",
