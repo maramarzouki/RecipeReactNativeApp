@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
@@ -12,6 +11,9 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useIsFocused } from '@react-navigation/native'
 
 export default function MySavedRecipes({ navigation }) {
+
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+    
     const isFocused = useIsFocused()
     const [savedRecipesList, setSavedRecipesList] = useState([])
 

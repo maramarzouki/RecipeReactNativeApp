@@ -5,21 +5,20 @@ import Dialog from 'react-native-dialog'
 import axios from 'axios'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode'; 
-import { IP_ADDRESS } from '@env'
-import { login } from '../service/AuthService';
+import { login } from '../service/AuthService'; 
 import * as SecureStore from "expo-secure-store"
 import { useFocusEffect } from '@react-navigation/native';
 
-// const IP_ADDRESS = process.env.IP_ADDRESS
-
 export default function Livestreams({ navigation }) {
+    
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
     const TOKEN_KEY = "1"
  
     const [currentLives, setCurrentLives] = useState([]);
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(false); 
     const [liveTitle, setLiveTitle] = useState("")
 
-    const [authState, setAuthState] = useState({
+    const [authState, setAuthState] = useState({ 
         token: null,
         authenticated: null,
         user_id: null
@@ -168,9 +167,9 @@ export default function Livestreams({ navigation }) {
                         </TouchableOpacity>
                     )
                 })
-            ) : (
+            ) : (  
                 <Text>No lives for now!</Text>
-            )}
+            )} 
             <View style={styles.dialogContainer}>
                 {/* <Bu title="Show dialog" onPress={showDialog} /> */}
                 <Dialog.Container visible={visible}>

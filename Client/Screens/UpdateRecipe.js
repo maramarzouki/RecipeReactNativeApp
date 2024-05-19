@@ -6,7 +6,6 @@ import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
 import * as ImagePicker from 'expo-image-picker';
 import categories from './CreateRecipe/Categories'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
@@ -20,6 +19,7 @@ if (!global.atob) {
 }
 
 export default function UpdateRecipe({ navigation, route }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
     const recipeID = route.params.recipeID;
 
     // const [recipeID, setRecipeID] = useState('')

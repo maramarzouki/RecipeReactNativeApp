@@ -4,7 +4,6 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import axios from 'axios';
-import { IP_ADDRESS } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
@@ -21,6 +20,8 @@ if (!global.atob) {
 
 
 export default function MyRecipesList({ navigation }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+    
     const [recipesList, setRecipesList] = useState([])
 
     const fetchToken = async () => {

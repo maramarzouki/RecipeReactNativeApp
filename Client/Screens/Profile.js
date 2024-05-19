@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPen, faPlus, faList, faBookmark } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
@@ -20,6 +19,8 @@ if (!global.atob) {
 }
 
 export default function Profile({ navigation }) {
+
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const isFocused = useIsFocused();
 

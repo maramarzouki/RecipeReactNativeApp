@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
-import { IP_ADDRESS } from '@env'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Signup({ navigation }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");

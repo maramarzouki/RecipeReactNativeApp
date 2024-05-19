@@ -5,10 +5,12 @@ import IngredientsUnits from './Units'
 import { Picker } from '@react-native-picker/picker';
 import IngredientQuantities from './IngredientsQuantity'
 import axios from 'axios';
-import { IP_ADDRESS } from '@env'
+// import { IP_ADDRESS } from '@env'
 
 
 export default function IngredientsForm({ navigation, route }) {
+    
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const recipeID = route.params.recipeID
     const isToCreate = route.params.isToCreate

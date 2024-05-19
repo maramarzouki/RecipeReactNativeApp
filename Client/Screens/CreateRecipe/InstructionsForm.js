@@ -2,9 +2,10 @@ import { View, Text, StyleSheet, TextInput, Button, TouchableHighlight, ScrollVi
 import React, { useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axios from 'axios';
-import { IP_ADDRESS } from '@env'
 
 export default function InstructionsForm({ navigation, route }) {
+  
+  const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
   const recipeID = route.params.recipeID
   const isToCreate = route.params.isToCreate

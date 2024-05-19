@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import Categories from './CreateRecipe/Categories'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { faAngleRight, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 export default function RecipesByCategory({ navigation, route }) {
+
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const category = route.params.category;
 

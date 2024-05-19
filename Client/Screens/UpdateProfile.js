@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import axios, { Axios } from 'axios'
-import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64';
@@ -18,6 +17,7 @@ if (!global.atob) {
 }
 
 export default function UpdateProfile({ navigation }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     // const [userID, setUserID] = useState('');
 

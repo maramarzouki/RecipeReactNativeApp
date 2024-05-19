@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Navbar from './Navbar';
 
 
 export default function Singin({ navigation }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

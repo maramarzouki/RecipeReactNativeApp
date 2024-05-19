@@ -4,12 +4,13 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { faAngleRight, faArrowRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import { useIsFocused } from '@react-navigation/native'
 // import Livestreams from '../livestream/app/livesreams'
 
  
 export default function Homepage({ navigation }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+    
     const isFocused = useIsFocused();
 
     const [appRecipes, setAppRecipes] = useState([])

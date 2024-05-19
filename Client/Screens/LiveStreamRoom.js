@@ -12,15 +12,21 @@ import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { IP_ADDRESS } from '@env';
 import { OverlayProvider } from 'stream-chat-expo';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 export default function LiveStreamRoom({ navigation, route }) {
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+
     const callId = route.params.id;
     const liveId = route.params.liveId;
+
+    const apiKey = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
+    const userId = authState.user_id;
+    const token = authState.token;
+    const user = { id: userId };
 
     const [authState, setAuthState] = useState({
         token: null,
@@ -45,10 +51,6 @@ export default function LiveStreamRoom({ navigation, route }) {
         fetchAuthState();
         console.log("authState", authState);
     }, [])
-    const apiKey = 'ya7d29hmmd9m';
-    const userId = authState.user_id;
-    const token = authState.token;
-    const user = { id: userId };
 
     const client = new StreamVideoClient({ apiKey, user, token });
     const call = client.call('livestream', callId);
@@ -114,16 +116,18 @@ export default function LiveStreamRoom({ navigation, route }) {
 
 
     return (
+        // <OverlayProvider>
         <StreamVideo client={client}>
             <OverlayProvider>
                 <StreamCall call={call}>
                     <View style={styles.videoContainer}>
                         <HostLivestream onEndStreamHandler={leaveLivestream} />
                     </View>
-                </StreamCall>
-                {/* <Toast/> */}
+                </StreamCall> 
+                <Toast />
             </OverlayProvider>
         </StreamVideo>
+        // </OverlayProvider>
     )
 }
 

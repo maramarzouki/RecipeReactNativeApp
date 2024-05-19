@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
-import { IP_ADDRESS } from '@env'
 
 export default function ResetPassword({ navigation, route }) {
+
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+    
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 

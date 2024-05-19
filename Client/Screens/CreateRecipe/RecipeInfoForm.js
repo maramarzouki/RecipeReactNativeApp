@@ -6,7 +6,6 @@ import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
 import * as ImagePicker from 'expo-image-picker';
 import categories from './Categories'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
@@ -20,6 +19,9 @@ if (!global.atob) {
 }
 
 const RecipeInfoForm = ({ navigation }) => {
+
+  const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+  
   const [recipeTitle, setRecipeTitle] = useState('');
   const [recipeDescription, setRecipeDescription] = useState('');
   const [recipeHours, setRecipeHours] = useState();

@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faSearch, faMagnifyingGlass, faPlay, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import axios from 'axios'
-import { IP_ADDRESS } from '@env'
 import { useIsFocused } from '@react-navigation/native'
 
 export default function SearchPage({ navigation }) {
+
+  const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
   const isFocused = useIsFocused();
 

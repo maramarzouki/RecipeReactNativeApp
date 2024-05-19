@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
-import { IP_ADDRESS } from '@env'
 
 export default function EnterEmail({ navigation }) {
+
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");

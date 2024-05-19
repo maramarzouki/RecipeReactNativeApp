@@ -6,11 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import axios from 'axios';
-import { IP_ADDRESS } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 
 export default function RecipeDetails({ navigation, route }) {
+
+    const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
 
     const recipeID = route.params.recipeID;
     const isFocused = useIsFocused();
