@@ -1,7 +1,7 @@
 {
   "cli": {
     "version": ">= 9.0.2",
-    "requireCommit":true
+    "requireCommit": true
   },
   "build": {
     "development": {
@@ -11,7 +11,12 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_IP_ADDRESS": "192.168.1.16",
+        "EXPO_PUBLIC_STREAM_ACCESS_KEY": "ya7d29hmmd9m"
+      }
+    }
   },
   "submit": {
     "production": {}
