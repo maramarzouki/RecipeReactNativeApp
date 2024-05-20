@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Categories from './CreateRecipe/Categories'
+import Categories from '../assets/data/Categories'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { faAngleRight, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'

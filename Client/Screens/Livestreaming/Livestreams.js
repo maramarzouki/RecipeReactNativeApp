@@ -238,14 +238,14 @@ import Dialog from 'react-native-dialog'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
-import { login } from '../service/AuthService';
+import { login } from '../../service/AuthService';
 import * as SecureStore from "expo-secure-store"
 import { useFocusEffect } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StreamVideoClient, StreamVideo, useStreamVideoClient } from '@stream-io/video-react-native-sdk';
 import { OverlayProvider } from 'stream-chat-expo';
 import Toast from 'react-native-toast-message';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import RenderLivestream from './RenderLivestream';
 import LiveStreamRoom from './LiveStreamRoom';
   

@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Call, StreamCall, StreamVideo, useStreamVideoClient, ViewerLivestream } from '@stream-io/video-react-native-sdk';
 
 import { OverlayProvider } from 'stream-chat-expo';
+import { useNavigation } from '@react-navigation/native';
 
-export default function LiveStreamWatch({ navigation, liveID }) {
+export default function LiveStreamWatch({ liveID }) {
   // const liveID = route.params.id;
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     console.log("liveeeeeeeeiddddddddd", liveID);
@@ -40,7 +43,7 @@ export default function LiveStreamWatch({ navigation, liveID }) {
   // }, [call, client, liveID])
 
   const goToHomeScreen = async () => {
-    navigation.goBack();
+    navigation.navigate('Navbar')
   }
 
   // if (!call) return null;

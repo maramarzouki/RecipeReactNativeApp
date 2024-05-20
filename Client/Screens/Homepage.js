@@ -57,7 +57,7 @@ export default function Homepage({ navigation }) {
                 </View>
                 <TouchableOpacity style={styles.profileImageView} onPress={() => { navigation.navigate('Profile') }}>
                     <Image
-                        source={require('../assets/chefavatr.jpg')}
+                        source={require('../assets/images/chefavatr.jpg')}
                         style={styles.profileImage}
                     />
                 </TouchableOpacity>
@@ -70,9 +70,9 @@ export default function Homepage({ navigation }) {
                             style={styles.category}
                             onPress={() => { goToRecipesByCategory('Sweets') }}
                             activeOpacity={0.9}
-                        >
+                        > 
                             <Image
-                                source={require('../assets/sweetsBG.jpg')}
+                                source={require('../assets/images/sweetsBG.jpg')}
                                 style={styles.categoriyImg}
                             />
                             <Text style={styles.categoryText}>Sweets</Text>
@@ -83,7 +83,7 @@ export default function Homepage({ navigation }) {
                             onPress={() => { goToRecipesByCategory('Pasta') }}
                         >
                             <Image
-                                source={require('../assets/pastaBG.jpg')}
+                                source={require('../assets/images/pastaBG.jpg')}
                                 style={styles.categoriyImg}
                             />
                             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -96,7 +96,7 @@ export default function Homepage({ navigation }) {
                             onPress={() => { goToRecipesByCategory('Drinks') }}
                         >
                             <Image
-                                source={require('../assets/drinksBG.jpg')}
+                                source={require('../assets/images/drinksBG.jpg')}
                                 style={styles.categoriyImg}
                             />
                             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -109,7 +109,7 @@ export default function Homepage({ navigation }) {
                             onPress={() => { goToRecipesByCategory('Soup') }}
                         >
                             <Image
-                                source={require('../assets/soupBG.jpg')}
+                                source={require('../assets/images/soupBG.jpg')}
                                 style={styles.categoriyImg}
                             />
                             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -121,7 +121,7 @@ export default function Homepage({ navigation }) {
                             activeOpacity={0.9}
                         >
                             <Image
-                                source={require('../assets/riceBG.jpg')}
+                                source={require('../assets/images/riceBG.jpg')}
                                 style={styles.categoriyImg}
                                 onPress={() => { goToRecipesByCategory('Rice') }}
                             />
@@ -151,7 +151,7 @@ export default function Homepage({ navigation }) {
                                     onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
                                 >
                                     <Image
-                                        // source={require('../assets/smallbackground5.jpg')}
+                                        // source={require('../assets/images/smallbackground5.jpg')}
                                         source={{ uri: item.image }}
                                         style={styles.recipeListImg}
                                     />

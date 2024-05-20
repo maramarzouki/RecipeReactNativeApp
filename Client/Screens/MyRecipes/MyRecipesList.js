@@ -7,7 +7,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'
 import { decode, encode } from 'base-64'; // Import base-64 library
-import Navbar from './Navbar'
+import Navbar from '../Navbar'
 
 // Set up the polyfill for atob and btoa
 if (!global.btoa) {
@@ -62,7 +62,7 @@ export default function MyRecipesList({ navigation }) {
         <View>
             <View>
                 <Image
-                    source={require('../assets/smallbackground5.jpg')}
+                    source={require('../../assets/images/smallbackground5.jpg')}
                     style={styles.backgroundImg}
                 />
                 <Text style={styles.backgroundImgText}>My recipes list</Text>

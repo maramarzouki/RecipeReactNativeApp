@@ -36,7 +36,7 @@ export default function EnterCode({ navigation, route }) {
 
 
     return (
-        <ImageBackground style={styles.image} source={require('../../assets/background14.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../assets/images/background14.jpg')}>
             <View style={styles.innerFrame}>
                 <Text style={styles.enterCodeText}>Please enter your code below:</Text>
                 <View style={styles.formContainer}>

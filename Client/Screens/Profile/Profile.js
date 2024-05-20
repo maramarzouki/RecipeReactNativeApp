@@ -69,12 +69,12 @@ export default function Profile({ navigation }) {
     return (
         <ImageBackground
             style={styles.image}
-            source={require('../assets/background18.jpg')}
+            source={require('../../assets/images/background18.jpg')}
             imageStyle={styles.imageStyle}>
             <View style={styles.overlay}></View>
             <View style={styles.container}>
                 <Image
-                    source={require('../assets/chefavatr.jpg')}
+                    source={require('../../assets/images/chefavatr.jpg')}
                     style={styles.profileImage} />
 
                 <View style={styles.textContainer}>
@@ -95,7 +95,7 @@ export default function Profile({ navigation }) {
                     activeOpacity={0.9}
                 >
                     <Image
-                        source={require('../assets/smallbackground5.jpg')}
+                        source={require('../../assets/images/smallbackground5.jpg')}
                         style={styles.recipeListImg}
                     />
                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -109,7 +109,7 @@ export default function Profile({ navigation }) {
                     onPress={()=>{navigation.navigate('Saved recipes')}}
                 >
                     <Image
-                        source={require('../assets/smallbackground4.jpg')}
+                        source={require('../../assets/images/smallbackground4.jpg')}
                         style={styles.recipeListImg}
                     />
                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>

@@ -5,8 +5,8 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Navbar from './Navbar';
-import { AuthContext } from './AuthContext';
+import Navbar from '../Navbar';
+import { AuthContext } from '../../context/AuthContext';
 
 
 export default function Singin({ navigation }) {
@@ -55,7 +55,7 @@ export default function Singin({ navigation }) {
     }
 
     return (
-        <ImageBackground style={styles.image} source={require('../assets/background14.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../assets/images/background14.jpg')}>
             <View style={styles.innerFrame}>
                 <Text style={styles.signinText}>SIGN IN</Text>
                 <View style={styles.formContainer}>

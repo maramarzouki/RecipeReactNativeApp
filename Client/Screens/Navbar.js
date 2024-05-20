@@ -4,15 +4,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native';
 import Homepage from './Homepage';
 import SearchPage from './SearchPage';
-import RecipeInfoForm from './CreateRecipe/RecipeInfoForm';
-import Profile from './Profile';
-import UpdateProfile from './UpdateProfile';
+import RecipeInfoForm from './MyRecipes/RecipeInfoForm';
+import Profile from './Profile/Profile';
+import UpdateProfile from './Profile/UpdateProfile';
 import { TabBarIndicator } from 'react-native-tab-view';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faGear, faHouse, faPlus, faSatellite, faSatelliteDish, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 // import Livestreams from '../livestream/app/livestream'; 
-import Livestreams from './Livestreams'; 
+import Livestreams from './Livestreaming/Livestreams'; 
 
 const Tab = createBottomTabNavigator();
 

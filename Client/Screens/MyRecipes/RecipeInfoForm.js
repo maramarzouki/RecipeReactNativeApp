@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Modal, TouchableOpacity, FlatList, StyleSheet, Button, Image, ScrollView } from 'react-native';
-import cuisineTypes from './CuisineType';
+import cuisineTypes from '../../assets/data/CuisineType';
 import { Picker } from '@react-native-picker/picker';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
 import * as ImagePicker from 'expo-image-picker';
-import categories from './Categories'
+import categories from '../../assets/data/Categories'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { jwtDecode } from 'jwt-decode'

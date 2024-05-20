@@ -90,7 +90,7 @@ export default function Signup({ navigation }) {
     }
 
     return (
-        <ImageBackground style={styles.image} source={require('../assets/background14.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../assets/images/background14.jpg')}>
             <View style={styles.innerFrame}>
                 <Text style={styles.signupText}>SIGN UP</Text>
                 <View style={styles.formContainer}>

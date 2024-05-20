@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Platform, FlatList, Modal, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import IngredientsUnits from './Units'
+import IngredientsUnits from '../../assets/data/Units'
 import { Picker } from '@react-native-picker/picker';
-import IngredientQuantities from './IngredientsQuantity'
+import IngredientQuantities from '../../assets/data/IngredientsQuantity'
 import axios from 'axios';
 // import { IP_ADDRESS } from '@env'
 
@@ -72,9 +72,9 @@ export default function IngredientsForm({ navigation, route }) {
             }).then((response) => {
                 console.log("responseeeee", response.data);
                 if (isToCreate) {
-                    navigation.navigate('Add recipe instructions', { recipeID: recipeID })
-                }else{
                     navigation.navigate('Recipe details', { recipeID: recipeID })
+                }else{
+                    navigation.navigate('Homepage', { recipeID: recipeID })
                 }
             }).catch((error) => {
                 console.log({ name, quantity, unit, recipeID });
@@ -84,10 +84,11 @@ export default function IngredientsForm({ navigation, route }) {
     }
 
     const cancel = () => {
-        axios.delete(`http://${IP_ADDRESS}:3001/deleteRecipe/${recipeID}`)
-        .then((response) => {
-            navigation.goBack();
-        })
+            axios.delete(`http://${IP_ADDRESS}:3001/deleteRecipe/${recipeID}`)
+            .then((response) => {
+                navigation.goBack();
+            })
+
     }
 
     return (
@@ -292,9 +293,9 @@ const styles = StyleSheet.create({
 // import { View, Text, StyleSheet, TextInput, Button, Platform, FlatList, Modal, Pressable } from 'react-native'
 // import React, { useState } from 'react'
 // import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-// import IngredientsUnits from './Units'
+// import IngredientsUnits from '../../assets/data/Units'
 // import { Picker } from '@react-native-picker/picker';
-// import IngredientQuantities from './IngredientsQuantity'
+// import IngredientQuantities from '../../assets/data/IngredientsQuantity'
 // import axios from 'axios';
 // // import { IP_ADDRESS } from '@env'
 

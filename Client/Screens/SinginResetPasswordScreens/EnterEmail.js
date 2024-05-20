@@ -32,7 +32,7 @@ export default function EnterEmail({ navigation }) {
     }
 
     return (
-        <ImageBackground style={styles.image} source={require('../../assets/background14.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../assets/images/background14.jpg')}>
             <View style={styles.innerFrame}>
                 <Text style={styles.enterEmailText}>Please enter your email here, to receive a code:</Text>
                 <View style={styles.formContainer}>

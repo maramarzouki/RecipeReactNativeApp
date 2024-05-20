@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import Categories from './CreateRecipe/Categories'
+import Categories from '../assets/data/Categories'
 
 export default function AllCategories({ navigation }) {
     const goToRecipesByCategory = (category) => {

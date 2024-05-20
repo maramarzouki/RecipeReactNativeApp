@@ -41,7 +41,7 @@ export default function ResetPassword({ navigation, route }) {
     }
 
     return (
-        <ImageBackground style={styles.image} source={require('../../assets/background14.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../assets/images/background14.jpg')}>
             <View style={styles.innerFrame}>
                 <Text style={styles.changePasswordText}>You can now change your password:</Text>
                 <View style={styles.formContainer}>

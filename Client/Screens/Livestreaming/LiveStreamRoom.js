@@ -16,14 +16,16 @@ import axios from 'axios';
 import { OverlayProvider } from 'stream-chat-expo';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import LiveStreamWatch from './LiveStreamWatch';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
   
-export default function LiveStreamRoom({ navigation, callId, liveId }) {
+export default function LiveStreamRoom({  callId, liveId }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
     const navigationRef = useRef();
+    const navigation = useNavigation();
 
     const { authState, initialized } = useContext(AuthContext);
 
@@ -68,10 +70,10 @@ export default function LiveStreamRoom({ navigation, callId, liveId }) {
         console.log(liveId);
         axios.delete(`http://${IP_ADDRESS}:3001/deleteLive/${liveId}`)
             .then((res) => {
-                // navigation.navigate('Livestreams');
-                if(navigationRef.current){
-                    navigationRef.current.navigate('Livestreams');
-                }
+                navigation.navigate('Navbar');
+                // if(navigationRef.current){
+                //     navigationRef.current.navigate('Livestreams');
+                // }
             }).catch((err) => {
                 console.log(err);
             })
