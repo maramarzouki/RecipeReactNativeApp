@@ -82,11 +82,11 @@ export default function Profile({ navigation }) {
                     <Text style={styles.username}>Member since: {memberSince}</Text>
                 </View>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.updateInfoButton}
                     onPress={() => { navigation.navigate('Edit profile'); console.log("edit profile"); }}>
                     <FontAwesomeIcon icon={faPen} size={15} style={styles.icon} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             <View style={{ flexDirection: 'row' }}>
                 <TouchableOpacity
@@ -192,9 +192,10 @@ const styles = StyleSheet.create({
         height: hp(25),
         backgroundColor: '#fff',
         borderRadius: hp(5),
-        top: hp(20),
+        top: hp(27),
         marginLeft: hp(2.2),
         elevation: hp(0.3),
+        alignContent: 'center'
     },
     recipeListImg: {
         width: hp(19.8),

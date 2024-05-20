@@ -37,10 +37,10 @@ export default function Singin({ navigation }) {
                 // console.log(response.data.Token);
                 // await loginForStream(email)
 
-                navigation.navigate("Navbar")
-                // localStorage.setItem('TOKEN', response.data.Token)
                 AsyncStorage.setItem('TOKEN', response.data.Token)
                 AsyncStorage.setItem('email', email)
+                navigation.navigate("Navbar")
+                // localStorage.setItem('TOKEN', response.data.Token)
             }).catch(error => {
                 console.log(error.response.data.ERROR);
                 const errorMessage = error.response.data.ERROR;

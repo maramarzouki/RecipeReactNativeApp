@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useIsFocused } from '@react-navigation/native'
 // import Livestreams from '../livestream/app/livesreams'
 
- 
+
 export default function Homepage({ navigation }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
     

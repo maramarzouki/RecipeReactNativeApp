@@ -34,7 +34,7 @@ export default function SearchPage({ navigation }) {
     <View style={{ backgroundColor: 'white', flex: 1 }}>
       <View>
         <View style={{ marginLeft: hp(1.5) }}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.inputIcon} />
+          {/* <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.inputIcon} /> */}
           <TextInput
             placeholder='Search'
             style={styles.searchInput}
@@ -43,7 +43,7 @@ export default function SearchPage({ navigation }) {
           />
         </View>
         <TouchableOpacity style={styles.profileImageView} onPress={searchRecipe}>
-          <FontAwesomeIcon icon={faPlay} style={styles.buttonIcon} size={hp(1.7)} />
+          <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.buttonIcon} size={hp(1.7)} />
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', top: hp(5) }}>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontSize: hp(1.7),
     borderRadius: hp(2),
     top: hp(2.1),
-    paddingLeft: hp(5),
+    paddingLeft: hp(2),
     padding: hp(1),
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

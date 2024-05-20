@@ -21,7 +21,7 @@ if (!global.atob) {
 const RecipeInfoForm = ({ navigation }) => {
 
   const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
-  
+
   const [recipeTitle, setRecipeTitle] = useState('');
   const [recipeDescription, setRecipeDescription] = useState('');
   const [recipeHours, setRecipeHours] = useState();
@@ -163,6 +163,7 @@ const RecipeInfoForm = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ScrollView >
         <Text style={styles.text}>Recipe Name:</Text>
         <TextInput
           style={styles.textInput}
@@ -301,7 +302,7 @@ const RecipeInfoForm = ({ navigation }) => {
         </Modal>
 
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding:0 }}>
           <TouchableOpacity onPress={() => { navigation.goBack(); }}>
             <Text style={styles.cancelButton}>Cancel</Text>
           </TouchableOpacity>
@@ -309,6 +310,8 @@ const RecipeInfoForm = ({ navigation }) => {
             <Text style={styles.saveButton}>Next</Text>
           </TouchableOpacity>
         </View>
+      </ScrollView>
+
     </View>
   );
 };
@@ -316,8 +319,10 @@ const RecipeInfoForm = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 15,
-    backgroundColor: '#fff'
+    padding: 20,
+    backgroundColor: '#fff',
+    paddingBottom: 0,
+    paddingTop: 0
   },
   textInput: {
     borderColor: '#D3D3D3',

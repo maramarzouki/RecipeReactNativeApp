@@ -64,19 +64,19 @@ export default function Navbar({ navigation }) {
                 }}
             />
             <Tab.Screen
-                name='Search'
-                component={SearchPage}
+                name='Livestream'
+                component={Livestreams}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.tabBarIcon}>
-                            <FontAwesomeIcon icon={faSearch} style={{
+                            <FontAwesomeIcon icon={faSatelliteDish} style={{
                                 color: focused ? '#800e13' : "#748c94",
                                 bottom: hp(0.5)
                             }} />
                             <Text style={{
                                 color: focused ? '#800e13' : "#748c94",
                                 fontSize: hp(1.3)
-                            }}>Search</Text>
+                            }}>Livestream</Text>
                         </View>
                     )
                 }}
@@ -100,19 +100,19 @@ export default function Navbar({ navigation }) {
                 })}
             />
             <Tab.Screen
-                name='Livestream'
-                component={Livestreams}
+                name='Profile'
+                component={Profile}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.tabBarIcon}>
-                            <FontAwesomeIcon icon={faSatelliteDish} style={{
+                            <FontAwesomeIcon icon={faUser} style={{
                                 color: focused ? '#800e13' : "#748c94",
                                 bottom: hp(0.5)
                             }} />
                             <Text style={{
                                 color: focused ? '#800e13' : "#748c94",
                                 fontSize: hp(1.3)
-                            }}>Livestream</Text>
+                            }}>Profile</Text>
                         </View>
                     )
                 }}

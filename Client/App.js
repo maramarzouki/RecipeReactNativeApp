@@ -34,13 +34,13 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from './Screens/AuthContext';
 import { AuthProvider } from './Screens/AuthContext';
 import { Slot } from 'expo-router'
+import RenderLivestream from './Screens/RenderLivestream';
 
 const Stack = createNativeStackNavigator();
 
 function InitialLayout() {
 
-  const [client, setClient] = useState(null);
-  const STREAM_KEY = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
+
   // const navigation = useNavigation();
   const navigationContainerRef = useRef();
 
@@ -65,120 +65,110 @@ function InitialLayout() {
   // }, [initialized, authState]);
 
   // Initialize the StreamVideoClient when the user is authenticated
-  useEffect(() => {
-    if (authState?.authenticated && authState.token) {
-      const user = { id: authState.user_id };
+  // useEffect(() => {
+  //   if (authState?.authenticated && authState.token) {
+  //     const user = { id: authState.user_id };
 
-      try {
-        const client = new StreamVideoClient({ apiKey: STREAM_KEY, user, token: authState.token });
-        setClient(client);
-      } catch (e) {
-        console.log('Error creating client: ', e);
-      }
-    }
-    console.log("clllllllll", client);
-    console.log("authState", authState);
-  }, [authState]);
+  //     try {
+  //       const client = new StreamVideoClient({ apiKey: STREAM_KEY, user, token: authState.token });
+  //       setClient(client);
+  //     } catch (e) {
+  //       console.log('Error creating client: ', e);
+  //     }
+  //   }
+  //   console.log("clllllllll", client);
+  //   console.log("authState", authState);
+  // }, [authState]);
 
   return (
     <NavigationContainer>
-      {client !== undefined && (
-
-        <Stack.Navigator initialRouteName='SignupScreen'>
-          <Stack.Screen
-            name='Initial Screen'
-            component={InitialLayout}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='SignupScreen'
-            component={Signup}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='SigninScreen'
-            component={Singin}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='EnterEmailScreen'
-            component={EnterEmail}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='EnterCodeScreen'
-            component={EnterCode}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='ResetPasswordScreen'
-            component={ResetPassword}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='Profile'
-            component={Profile} />
-          <Stack.Screen
-            name='Edit profile'
-            component={UpdateProfile} />
-          <Stack.Screen
-            name='Create new recipe'
-            component={RecipeInfoForm} />
-          <Stack.Screen
-            name='Add recipe ingredients'
-            component={IngredientsForm}
-            options={{ headerShown: true }} />
-          <Stack.Screen
-            name='Add recipe instructions'
-            component={InstructionsForm}
-            options={{ headerShown: true }} />
-          <Stack.Screen
-            name='My recipes'
-            component={MyRecipesList} />
-          <Stack.Screen
-            name='Recipe details'
-            component={RecipeDetails} />
-          <Stack.Screen
-            name='Homepage'
-            component={Homepage}
-            options={{ headerLeft: null }} />
-          <Stack.Screen
-            name='Search'
-            component={SearchPage} />
-          <Stack.Screen
-            name='Navbar'
-            component={Navbar}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='Category'
-            component={RecipesByCategory} />
-          <Stack.Screen
-            name='AllCategories'
-            component={AllCategories} />
-          <Stack.Screen
-            name='Update Recipe'
-            component={UpdateRecipe} />
-          <Stack.Screen
-            name='Saved recipes'
-            component={MySavedRecipes} />
-          <Stack.Screen
-            name='Livestreams'
-            component={Livestreams} />
-          <Stack.Screen
-            name='Livestream room'
-            component={LiveStreamRoom}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name='Livestream watch room'
-            component={LiveStreamWatch}
-            options={{ headerShown: false }} />
-        </Stack.Navigator>
-
-      )}
-      {client && (
-        <StreamVideo client={client}>
-          <OverlayProvider>
-            {/* <Livestreams /> */}
-            <Slot />
-            {/* <LiveStreamRoom /> */}
-            <Toast />
-          </OverlayProvider>
-        </StreamVideo>
-      )}
+      <Stack.Navigator initialRouteName='SignupScreen'>
+        <Stack.Screen
+          name='Initial Screen'
+          component={InitialLayout}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='SignupScreen'
+          component={Signup}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='SigninScreen'
+          component={Singin}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='EnterEmailScreen'
+          component={EnterEmail}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='EnterCodeScreen'
+          component={EnterCode}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='ResetPasswordScreen'
+          component={ResetPassword}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Profile'
+          component={Profile} />
+        <Stack.Screen
+          name='Edit profile'
+          component={UpdateProfile} />
+        <Stack.Screen
+          name='Create new recipe'
+          component={RecipeInfoForm} />
+        <Stack.Screen
+          name='Add recipe ingredients'
+          component={IngredientsForm}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Add recipe instructions'
+          component={InstructionsForm}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='My recipes'
+          component={MyRecipesList} />
+        <Stack.Screen
+          name='Recipe details'
+          component={RecipeDetails} />
+        <Stack.Screen
+          name='Homepage'
+          component={Homepage}
+          options={{ headerLeft: null }} />
+        <Stack.Screen
+          name='Search'
+          component={SearchPage} />
+        <Stack.Screen
+          name='Navbar'
+          component={Navbar}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Category'
+          component={RecipesByCategory} />
+        <Stack.Screen
+          name='AllCategories'
+          component={AllCategories} />
+        <Stack.Screen
+          name='Update Recipe'
+          component={UpdateRecipe} />
+        <Stack.Screen
+          name='Saved recipes'
+          component={MySavedRecipes} />
+        <Stack.Screen
+          name='Livestreams'
+          component={Livestreams} />
+        <Stack.Screen
+          name='Livestream room'
+          component={LiveStreamRoom}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Livestream watch room'
+          component={LiveStreamWatch}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='RenderLivestream'
+          component={RenderLivestream}
+          options={{ headerShown: false }} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
@@ -187,7 +177,9 @@ const App = () => {
   return (
     <AuthProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <InitialLayout />
+        <OverlayProvider>
+          <InitialLayout />
+        </OverlayProvider>
       </GestureHandlerRootView>
     </AuthProvider>
   );

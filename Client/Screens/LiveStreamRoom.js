@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Share } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
     Call,
     StreamVideoClient,
@@ -7,7 +7,7 @@ import {
     StreamVideo,
     StreamCall,
     HostLivestream,
-    useStreamVideoClient 
+    useStreamVideoClient
 } from '@stream-io/video-react-native-sdk';
 import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,17 +20,19 @@ import { AuthContext } from './AuthContext';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-
-export default function LiveStreamRoom({ navigation, route }) {
+  
+export default function LiveStreamRoom({ navigation, callId, liveId }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
+    const navigationRef = useRef();
 
-  const { authState, initialized } = useContext(AuthContext);
+    const { authState, initialized } = useContext(AuthContext);
 
 
     // const callId = route.params.id;
     // const liveId = route.params.liveId;
+    // const client = route.params.client;
     const client = useStreamVideoClient()
- 
+
     // const [authState, setAuthState] = useState({
     //     token: null, 
     //     authenticated: null,
@@ -55,27 +57,35 @@ export default function LiveStreamRoom({ navigation, route }) {
     //     }
     // };
 
+
+
+    // const client = new StreamVideoClient({ apiKey, user, token });
+    const call = client.call('livestream', callId);
+    call.join({ create: true });
+
+    const leaveLivestream = () => {
+        console.log(callId);
+        console.log(liveId);
+        axios.delete(`http://${IP_ADDRESS}:3001/deleteLive/${liveId}`)
+            .then((res) => {
+                // navigation.navigate('Livestreams');
+                if(navigationRef.current){
+                    navigationRef.current.navigate('Livestreams');
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
     useEffect(() => {
-        console.log("clientttttttttt", client);
+        console.log("clientttttttttt", client); 
         console.log("authStateeeeeeee", authState);
+        console.log("callllllllll", call);
         // fetchAuthState();
         // console.log("authStateeeeee", authState);  
     }, [])
 
-
-    // const client = new StreamVideoClient({ apiKey, user, token });
-    // const call = client.call('livestream', callId);
-    // call.join({ create: true });
-
-    // const leaveLivestream = () => {
-    //     axios.delete(`http://${IP_ADDRESS}:3001/deleteLive/${liveId}`)
-    //         .then((res) => {
-    //             navigation.goBack(); 
-    //         }).catch((err) => {
-    //             console.log(err);
-    //         })
-    // }
-
+ 
     // const shareMeeting = async () => {
     //     Share.share({
     //         message: `Join my meeting: myapp://(inside)/(room)/${id}`,
@@ -123,15 +133,24 @@ export default function LiveStreamRoom({ navigation, route }) {
     //       unsubscribe()
     //     }
     //   }, [])
-  
 
+
+    if (!call) { return; }
 
     return (
-                    // <StreamCall call={call}>
+        // <StreamVideo client={client}>
+                <View style={{ flex: 1 }}>
+                    <StreamCall call={call}>
                         <View style={styles.videoContainer}>
-                            {/* <HostLivestream onEndStreamHandler={leaveLivestream} /> */}
+                            <HostLivestream onEndStreamHandler={leaveLivestream} />
                         </View>
-                    // </StreamCall>
+                    </StreamCall>
+                </View>
+        // </StreamVideo>
+
+
+
+
     )
 }
 

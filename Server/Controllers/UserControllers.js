@@ -10,8 +10,8 @@ const stream_chat = require('stream-chat')
 
 // const { STREAM_API_KEY, STREAM_API_SECRET } = process.env;
 
-const STREAM_API_KEY = "ya7d29hmmd9m"
-const STREAM_API_SECRET = "ac8trwcegut625s6xg5zkugdtgcbm9zr729877vzye5xub6n74qzsjq89f49dc9c"
+const STREAM_API_KEY = "3jc6qrrqu9ae"
+const STREAM_API_SECRET = "p98mwzejnhw7q33sr39knxxverfee5rnq7qtsmkc7b97mq5sjughkwd7pyw9g2k5"
 
 const client = stream_chat.StreamChat.getInstance(STREAM_API_KEY, STREAM_API_SECRET)
 
