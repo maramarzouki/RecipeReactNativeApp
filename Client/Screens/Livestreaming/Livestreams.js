@@ -229,9 +229,9 @@
 //     }
 // });
 
- 
 
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
@@ -248,7 +248,7 @@ import Toast from 'react-native-toast-message';
 import { AuthContext } from '../../context/AuthContext';
 import RenderLivestream from './RenderLivestream';
 import LiveStreamRoom from './LiveStreamRoom';
-  
+
 
 export default function Livestreams({ navigation }) {
 
@@ -259,13 +259,13 @@ export default function Livestreams({ navigation }) {
     const STREAM_KEY = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
     // const TOKEN_KEY = "1"
     // const apiKey = process.env.EXPO_PUBLIC_STREAM_ACCESS_KEY;
-   
+
     const [currentLives, setCurrentLives] = useState([]);
-    const [visible, setVisible] = useState(false); 
+    const [visible, setVisible] = useState(false);
     const [liveTitle, setLiveTitle] = useState("")
     // const [client, setClient] = useState(null)
-        
-    const [email, setEmail] = useState(null)    
+
+    const [email, setEmail] = useState(null)
     // const client = useStreamVideoClient() 
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [whatVideoIsThis, setWhatVideoIsThis] = useState("")
@@ -351,7 +351,7 @@ export default function Livestreams({ navigation }) {
             setEmail(storedEmail)
             return storedEmail;
         } catch (error) {
-            console.error('Error fetching email:', error);  
+            console.error('Error fetching email:', error);
             return null;
         }
     };
@@ -415,20 +415,20 @@ export default function Livestreams({ navigation }) {
     // })
 
     useEffect(() => {
-        fetchEmail();  
+        fetchEmail();
         // const email = fetchEmail();
         // console.log("The email", email);
         // console.log(AsyncStorage.getItem('email')); 
         // setEmail(email)
         // getLives()
     }, [])
-    useFocusEffect(  
-        useCallback(() => {  
+    useFocusEffect(
+        useCallback(() => {
             loginForStream(email)
-            if (isFirstLoad) { 
+            if (isFirstLoad) {
                 loginForStream(email);
                 setIsFirstLoad(false);
-            }   
+            }
             getLives();
         }, [])
     );
@@ -458,11 +458,11 @@ export default function Livestreams({ navigation }) {
             } catch (e) {
                 console.log('Error creating client: ', e);
             }
-        } 
+        }
         console.log("clllllllll", client);
-        console.log("authState", authState); 
-    }, [authState]); 
-         
+        console.log("authState", authState);
+    }, [authState]);
+
     // useEffect(() => { 
     //     if (authState.token && authState.user_id) {
     //         const initializeClient = async () => {
@@ -480,7 +480,7 @@ export default function Livestreams({ navigation }) {
     //         initializeClient();
     //     }
     // }, [authState]);
-   
+
     const watchStream = async (id) => {
         if (client) {
             navigation.navigate('RenderLivestream', { live_ID: liveID, call_ID: id, StreamType: "Watch", client: client });
@@ -501,19 +501,20 @@ export default function Livestreams({ navigation }) {
     return (
         <>
             {/* {client && ( */}
-                <GestureHandlerRootView>
-                    <View style={styles.container}>
-                        {/* <StreamVideo client={client}>*/}
-                        <OverlayProvider>
-                            <View style={styles.buttonsView}>
-                                <TouchableOpacity style={styles.buttonsStyle} onPress={showDialog}>
-                                    <Text style={styles.buttonTextStyle}>Start live</Text>
-                                </TouchableOpacity>
-                                {/* <TouchableOpacity style={styles.buttonsStyle}>
+            <GestureHandlerRootView>
+                <View style={styles.container}>
+                    {/* <StreamVideo client={client}>*/}
+                    <OverlayProvider>
+                        <View style={styles.buttonsView}>
+                            <TouchableOpacity style={styles.buttonsStyle} onPress={showDialog}>
+                                <Text style={styles.buttonTextStyle}>Start live</Text>
+                            </TouchableOpacity>
+                            {/* <TouchableOpacity style={styles.buttonsStyle}>
                                     <Text style={styles.buttonTextStyle}>Create room</Text>
                                 </TouchableOpacity> */}
-                            </View>
-                            <Text style={styles.onGoingLiveText}>On going lives:</Text>
+                        </View>
+                        <Text style={styles.onGoingLiveText}>On going lives:</Text>
+                        <ScrollView> 
                             {currentLives.length > 0 ? (
                                 currentLives.map((item, key) => {
                                     return (
@@ -527,23 +528,24 @@ export default function Livestreams({ navigation }) {
                             ) : (
                                 <Text>No lives for now!</Text>
                             )}
-                            <View style={styles.dialogContainer}>
-                                {/* <Bu title="Show dialog" onPress={showDialog} /> */}
-                                <Dialog.Container visible={visible}>
-                                    <Dialog.Title>Enter a title for your live</Dialog.Title>
-                                    <Dialog.Input onChangeText={(text) => setLiveTitle(text)} placeholder='Title' />
-                                    <Dialog.Button label="Cancel" onPress={handleCancel} />
-                                    <Dialog.Button label="Start Live" onPress={() => handleCreate()} />
-                                </Dialog.Container>
+                        </ScrollView>
+                        <View style={styles.dialogContainer}>
+                            {/* <Bu title="Show dialog" onPress={showDialog} /> */}
+                            <Dialog.Container visible={visible}>
+                                <Dialog.Title>Enter a title for your live</Dialog.Title>
+                                <Dialog.Input onChangeText={(text) => setLiveTitle(text)} placeholder='Title' />
+                                <Dialog.Button label="Cancel" onPress={handleCancel} />
+                                <Dialog.Button label="Start Live" onPress={() => handleCreate()} />
+                            </Dialog.Container>
 
-                            </View>
-                        </OverlayProvider>
-                        {/*  </StreamVideo> */}
-                    </View>
-                </GestureHandlerRootView>
+                        </View>
+                    </OverlayProvider>
+                    {/*  </StreamVideo> */}
+                </View>
+            </GestureHandlerRootView>
             {/* )} */}
 
-          
+
         </>
 
 

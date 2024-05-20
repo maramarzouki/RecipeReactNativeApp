@@ -35,6 +35,7 @@ import { AuthContext } from './context/AuthContext';
 import { AuthProvider } from './context/AuthContext';
 import { Slot } from 'expo-router'
 import RenderLivestream from './Screens/Livestreaming/RenderLivestream';
+import Settings from './Screens/Settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -167,6 +168,10 @@ function InitialLayout() {
         <Stack.Screen
           name='RenderLivestream'
           component={RenderLivestream}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='Settings'
+          component={Settings}
           options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

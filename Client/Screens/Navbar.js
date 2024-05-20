@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faGear, faHouse, faPlus, faSatellite, faSatelliteDish, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 // import Livestreams from '../livestream/app/livestream'; 
 import Livestreams from './Livestreaming/Livestreams'; 
+import Settings from './Settings';
 
 const Tab = createBottomTabNavigator();
 
@@ -114,12 +115,12 @@ export default function Navbar({ navigation }) {
                                 fontSize: hp(1.3)
                             }}>Profile</Text>
                         </View>
-                    )
+                    ) 
                 }}
             />
             <Tab.Screen
                 name='Settings'
-                component={UpdateProfile}
+                component={Settings}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.tabBarIcon}>
