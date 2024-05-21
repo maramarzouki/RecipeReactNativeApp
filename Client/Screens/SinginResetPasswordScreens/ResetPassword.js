@@ -17,7 +17,7 @@ export default function ResetPassword({ navigation, route }) {
     const code = route.params.codeToNum;
 
     const changePasswordThenLogin = async () => {
-        console.log("change password");
+        // console.log("change password");
         setPasswordError("");
         setConfirmPasswordError("");
 
@@ -28,6 +28,7 @@ export default function ResetPassword({ navigation, route }) {
         } else if (password.length < 8) {
             setPasswordError("Passwords must be at least 8 characters!")
         } else {
+            console.log("..");
             Axios.put(`http://${IP_ADDRESS}:3001/resetPassword`, {
                 code, password
             }).then((response) => {

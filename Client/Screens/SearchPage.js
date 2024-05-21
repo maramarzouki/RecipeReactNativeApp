@@ -16,7 +16,7 @@ export default function SearchPage({ navigation }) {
   const [searchResults, setSearchResults] = useState([])
 
   const searchRecipe = async () => {
-    console.log("Searching recipe");
+    console.log("Searching recipe");   
     setSearchResults([])
     const response = await axios.get(`http://${IP_ADDRESS}:3001/searchRecipe?query=${query}`)
     setSearchResults(response.data)

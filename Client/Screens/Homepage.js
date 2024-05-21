@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native'
 
 export default function Homepage({ navigation }) {
     const IP_ADDRESS = process.env.EXPO_PUBLIC_IP_ADDRESS
-    
+
     const isFocused = useIsFocused();
 
     const [appRecipes, setAppRecipes] = useState([])
@@ -70,7 +70,7 @@ export default function Homepage({ navigation }) {
                             style={styles.category}
                             onPress={() => { goToRecipesByCategory('Sweets') }}
                             activeOpacity={0.9}
-                        > 
+                        >
                             <Image
                                 source={require('../assets/images/sweetsBG.jpg')}
                                 style={styles.categoriyImg}
@@ -140,32 +140,34 @@ export default function Homepage({ navigation }) {
             </View>
             <View>
                 <Text style={styles.title}>Recipes</Text>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                    {(appRecipes.length > 0) ? (
-                        appRecipes.map((item, key) => {
-                            return (
-                                <TouchableOpacity
-                                    style={styles.recipeList}
-                                    activeOpacity={0.9}
-                                    key={key}
-                                    onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
-                                >
-                                    <Image
-                                        // source={require('../assets/images/smallbackground5.jpg')}
-                                        source={{ uri: item.image }}
-                                        style={styles.recipeListImg}
-                                    />
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: hp(1.7), paddingRight: hp(1.5) }}>
-                                        <Text style={styles.recipeListText}>{item.title}</Text>
-                                        <FontAwesomeIcon icon={faAngleRight} size={15} style={styles.recipeListIcon} />
-                                    </View>
-                                </TouchableOpacity>
-                            )
-                        })
-                    ) : (
-                        <Text style={{ textAlign: 'center' }}>No recipes to show!</Text>
-                    )}
-                </View>
+                <ScrollView contentContainerStyle={styles.recipeContainer}>
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                        {(appRecipes.length > 0) ? (
+                            appRecipes.map((item, key) => {
+                                return (
+                                    <TouchableOpacity
+                                        style={styles.recipeList}
+                                        activeOpacity={0.9}
+                                        key={key}
+                                        onPress={() => { navigation.navigate('Recipe details', { recipeID: item._id }) }}
+                                    >
+                                        <Image
+                                            // source={require('../assets/images/smallbackground5.jpg')}
+                                            source={{ uri: item.image }}
+                                            style={styles.recipeListImg}
+                                        />
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: hp(1.7), paddingRight: hp(1.5) }}>
+                                            <Text style={styles.recipeListText}>{item.title}</Text>
+                                            <FontAwesomeIcon icon={faAngleRight} size={15} style={styles.recipeListIcon} />
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            })
+                        ) : (
+                            <Text style={{ textAlign: 'center' }}>No recipes to show!</Text>
+                        )}
+                    </View>
+                </ScrollView>
             </View>
 
         </View>
@@ -292,5 +294,8 @@ const styles = StyleSheet.create({
         top: hp(2),
         fontSize: hp(1.9),
         fontWeight: 'bold',
+    },
+    recipeContainer: {
+        alignItems: 'center',
     },
 })

@@ -66,14 +66,14 @@ export default function RecipeDetails({ navigation, route }) {
     }
 
     const getRecipeDetails = async () => {
-        console.log("Getting recipe details...");
+        // console.log("Getting recipe details...");
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const currentUser = decodedToken._id
         setUserID(decodedToken._id);
 
         // setIsOwnRecipe(userID === recipeUser)
-        // console.log("Displaying");
+        console.log("Displaying");
         axios.get(`http:${IP_ADDRESS}:3001/getRecipeDetails/${recipeID}`)
             .then(response => {
                 // console.log(response.data);
@@ -118,7 +118,7 @@ export default function RecipeDetails({ navigation, route }) {
 
     useEffect(() => {
         if (isFocused) {
-            console.log("Displaying");
+            // console.log("Displaying");
             getRecipeDetails();
             getRecipeIngredients();
             getRecipeInstructions()
@@ -152,6 +152,7 @@ export default function RecipeDetails({ navigation, route }) {
     };
 
     const deleteItem = () => {
+        console.log("..");
         axios.delete(`http://${IP_ADDRESS}:3001/deleteRecipe/${recipeID}`)
             .then(response => {
                 console.log(response.data);

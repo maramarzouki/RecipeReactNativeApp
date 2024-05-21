@@ -52,9 +52,9 @@ export default function IngredientsForm({ navigation, route }) {
     };
 
     const searchIngredients = async () => {
-        console.log("searching...");
+        // console.log("searching...");
         try {
-            console.log("search");
+            // console.log("search");
             const response = await axios.get(`https://api.spoonacular.com/food/ingredients/search?query=${searchQuery}&number=10&apiKey=${apiKey}`);
             setSearchResults(response.data.results);
             setShowModal(true);
@@ -64,9 +64,10 @@ export default function IngredientsForm({ navigation, route }) {
     };
 
     const saveIngredients = async () => {
-        console.log("instructions");
+        // console.log("instructions");
         for (const ingredient of ingredients) {
             const { name, quantity, unit, optional } = ingredient;
+            // console.log(".."); 
             await axios.post(`http://${IP_ADDRESS}:3001/addIngredient`, {
                 name, quantity, unit, recipeID
             }).then((response) => {
@@ -74,7 +75,7 @@ export default function IngredientsForm({ navigation, route }) {
                 if (isToCreate) {
                     navigation.navigate('Recipe details', { recipeID: recipeID })
                 }else{
-                    navigation.navigate('Homepage', { recipeID: recipeID })
+                    navigation.replace('Navbar')
                 }
             }).catch((error) => {
                 console.log({ name, quantity, unit, recipeID });
@@ -84,6 +85,7 @@ export default function IngredientsForm({ navigation, route }) {
     }
 
     const cancel = () => {
+        // console.log("..");
             axios.delete(`http://${IP_ADDRESS}:3001/deleteRecipe/${recipeID}`)
             .then((response) => {
                 navigation.goBack();

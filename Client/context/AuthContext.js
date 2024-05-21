@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
 
     // useEffect(()=>{
         const loadStreamToken = async () => {
+            console.log("..");
             const data = await SecureStore.getItemAsync(TOKEN_KEY);
             // console.log("dataaaaaaa", data);
     
@@ -34,15 +35,17 @@ export const AuthProvider = ({ children }) => {
                     user_id: object.data.user.id,
                 });
                 setInitialized(true);
-                //   console.log("authstate",authState); 
+                //   console.lo g("authstate",authState); 
             }
             // console.log("authState", authState);
-    
-        };
+       
+        }; 
     //     loadStreamToken();
     // })
 
     const loginForStream = async (email) => {
+        // console.log("..");
+        // console.log("...");
         // const email = await fetchEmail();
         // console.log("email", email);
         try {

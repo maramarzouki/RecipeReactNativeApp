@@ -42,7 +42,7 @@ export default function UpdateProfile({ navigation }) {
     };
 
     const dislayUserInfo = async () => {
-        console.log("Displaying user info");
+        // console.log("Displaying user info");
         try {
             const token = await fetchToken();
             const decodedToken = jwtDecode(token);
@@ -64,6 +64,7 @@ export default function UpdateProfile({ navigation }) {
     };
 
     const updateUserInfo = async () => {
+        // console.log("..");
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const userID = decodedToken._id
@@ -76,6 +77,7 @@ export default function UpdateProfile({ navigation }) {
         } else if (!email) {
             setEmailError("This input cannot be empty!");
         } else {
+            // console.log("..");
             axios.put(`http://${IP_ADDRESS}:3001/updateUserDetails/${userID}`, {
                 username, email
             })
@@ -102,6 +104,7 @@ export default function UpdateProfile({ navigation }) {
     }
 
     const resetPasword = async () => {
+        // console.log("..");
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const userID = decodedToken._id
@@ -116,6 +119,7 @@ export default function UpdateProfile({ navigation }) {
         } else if (password.length < 8) {
             setPasswordError("Passwords must be at least 8 characters!")
         } else {
+            console.log("..");
             axios.put(`http://${IP_ADDRESS}:3001/resetpassword/${userID}`, {
                 password
             }).then(response => {

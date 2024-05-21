@@ -26,7 +26,7 @@ export default function Signup({ navigation }) {
     //     AsyncStorage.removeItem('initialized');
     // })
     const registerUser = () => {
-        console.log("registerUser");
+        console.log("registerUser"); 
         setUsernameError("");
         setEmailError("");
         setPasswordError("");
@@ -44,7 +44,8 @@ export default function Signup({ navigation }) {
             setConfirmPasswordError("Passwords do not match!");
         }else{
             console.log("button pressed!");
-            console.log(IP_ADDRESS);
+            console.log(".");
+            console.log(IP_ADDRESS); 
             Axios.post(`http://${IP_ADDRESS}:3001/signup`, {
                 username, email, password
             }).then(response => {

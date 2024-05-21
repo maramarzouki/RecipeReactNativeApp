@@ -3,10 +3,14 @@ import axios from "axios"
 
 const TOKEN_KEY = "1"
 // export const API_URL = process.env.EXPO_PUBLIC_SERVER_URL;
-export const API_URL = "http://192.168.1.16:3001"
+export const API_URL = "http://192.168.216.94:3001"
 
 export async function login(email, password) {
+  // console.log('====================================');
+  // console.log("..");
+  // console.log('====================================');
   try {
+    console.log("."); 
     const result = await axios.post(`${API_URL}/loginUserToStream`, { email, password })
 
     // Write the JWT to our secure storage
@@ -19,6 +23,7 @@ export async function login(email, password) {
 
 export async function register(email, password) {
   try {
+    console.log(".."); 
     const result = await axios.post(`${API_URL}/register`, { email, password })
 
     await SecureStore.setItemAsync(TOKEN_KEY, JSON.stringify(result))
@@ -26,7 +31,7 @@ export async function register(email, password) {
     return result
   } catch (e) {
     return { error: true, msg: e.response?.data.msg }
-  }
+  } 
 }
 
 export async function logout() {

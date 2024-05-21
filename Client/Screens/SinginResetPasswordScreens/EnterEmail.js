@@ -12,12 +12,13 @@ export default function EnterEmail({ navigation }) {
     const [emailError, setEmailError] = useState("");
 
     const verifyEmail = () => {
-        console.log("verifyEmail...");
+        // console.log("verifyEmail...");
         setEmailError("");
 
         if (!email) {
             setEmailError("Email cannot be empty!");
         }
+        console.log("..");
         Axios.post(`http://${IP_ADDRESS}:3001/verifyEmailBeforeResetPassword`, {
             email
         }).then((response) => {

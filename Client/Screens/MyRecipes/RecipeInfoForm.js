@@ -74,7 +74,7 @@ const RecipeInfoForm = ({ navigation }) => {
   };
 
   const fetchToken = async () => {
-    console.log("Fetching token...");
+    // console.log("Fetching token...");
     try {
       const storedToken = await AsyncStorage.getItem('TOKEN');
       return storedToken;
@@ -84,27 +84,67 @@ const RecipeInfoForm = ({ navigation }) => {
     }
   };
 
+  // const saveRecipe = async () => {
+  //   try {
+  //     // console.log("Displayin");
+  //     const token = await fetchToken();
+  //     const decodedToken = jwtDecode(token);
+  //     const userID = decodedToken._id;
+
+  //     // const formData = new FormData();
+  //     // formData.append('title', recipeTitle);
+  //     // formData.append('description', recipeDescription);
+  //     // formData.append('durationHours', recipeHours);
+  //     // formData.append('durationMinutes', recipeMinutes);
+  //     // formData.append('level', recipeLevel);
+  //     // formData.append('image', recipeImage);
+  //     // formData.append('cuisineType', selectedCuisineType);
+  //     // formData.append('category', selectedCategory);
+  //     // formData.append('user', userID)
+
+  //     // console.log("FORMDATA",formData);
+
+  //     axios.post(`http:${IP_ADDRESS}:3001/createRecipe`, {
+  //       title: recipeTitle,
+  //       description: recipeDescription,
+  //       durationHours: recipeHours,
+  //       durationMinutes: recipeMinutes,
+  //       level: recipeLevel,
+  //       image: recipeImage,
+  //       cuisineType: selectedCuisineType,
+  //       category: selectedCategory,
+  //       isOwnRecipe: true,
+  //       user: userID
+  //     }).then(response => {
+  //       // setRecipeID(response.data._id)
+  //       navigation.navigate('Add recipe ingredients', { recipeID: response.data._id });
+  //       console.log(response.data._id);
+  //     }).catch(error => {
+  //       console.log(error.response);
+  //     })
+
+
+  //   } catch (error) {
+  //     console.log("save recipe error", error.message);
+  //   }
+
+  // }
+
   const saveRecipe = async () => {
+    // Validation check for required fields
+    // console.log("..");
+    if (!recipeTitle || !recipeHours || !recipeMinutes || !recipeImage || !selectedCuisineType || !selectedCategory) {
+      alert('Please fill in all the required fields.');
+      return;
+    }
+  
     try {
-      console.log("Displayin");
       const token = await fetchToken();
       const decodedToken = jwtDecode(token);
       const userID = decodedToken._id;
-
-      // const formData = new FormData();
-      // formData.append('title', recipeTitle);
-      // formData.append('description', recipeDescription);
-      // formData.append('durationHours', recipeHours);
-      // formData.append('durationMinutes', recipeMinutes);
-      // formData.append('level', recipeLevel);
-      // formData.append('image', recipeImage);
-      // formData.append('cuisineType', selectedCuisineType);
-      // formData.append('category', selectedCategory);
-      // formData.append('user', userID)
-
-      // console.log("FORMDATA",formData);
-
-      axios.post(`http:${IP_ADDRESS}:3001/createRecipe`, {
+      console.log("..");
+  
+      axios.post(`http://${IP_ADDRESS}:3001/createRecipe`, {
         title: recipeTitle,
         description: recipeDescription,
         durationHours: recipeHours,
@@ -116,18 +156,14 @@ const RecipeInfoForm = ({ navigation }) => {
         isOwnRecipe: true,
         user: userID
       }).then(response => {
-        // setRecipeID(response.data._id)
         navigation.navigate('Add recipe ingredients', { recipeID: response.data._id });
         console.log(response.data._id);
       }).catch(error => {
         console.log(error.response);
-      })
-
-
+      });
     } catch (error) {
       console.log("save recipe error", error.message);
     }
-
   }
 
 

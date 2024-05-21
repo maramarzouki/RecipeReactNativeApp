@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const instructionSchema = mongoose.Schema({
-    stepNum: Number,
+    stepNum: Number, 
     stepDesc: String,
     recipeID:{
         type: mongoose.Schema.Types.ObjectId,

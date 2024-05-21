@@ -66,10 +66,12 @@ export default function LiveStreamRoom({  callId, liveId }) {
     call.join({ create: true });
 
     const leaveLivestream = () => {
+        console.log("..");
         console.log(callId);
         console.log(liveId);
         axios.delete(`http://${IP_ADDRESS}:3001/deleteLive/${liveId}`)
             .then((res) => {
+                console.log(".");
                 navigation.navigate('Navbar');
                 // if(navigationRef.current){
                 //     navigationRef.current.navigate('Livestreams');

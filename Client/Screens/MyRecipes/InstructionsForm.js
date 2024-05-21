@@ -19,7 +19,9 @@ export default function InstructionsForm({ navigation, route }) {
   };
 
   const saveInstructions = async () => {
+    // console.log("..");
     for (const instruction of instructionFields) {
+      console.log("..");
       const { number, details } = instruction;
       const num = parseInt(number, 10)
       await axios.post(`http://${IP_ADDRESS}:3001/addInstruction`, {

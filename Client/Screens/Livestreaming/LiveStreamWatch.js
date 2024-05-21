@@ -43,6 +43,7 @@ export default function LiveStreamWatch({ liveID }) {
   // }, [call, client, liveID])
 
   const goToHomeScreen = async () => {
+    console.log("..");
     navigation.navigate('Navbar')
   }
 

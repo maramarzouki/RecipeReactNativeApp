@@ -21,7 +21,7 @@ export default function Singin({ navigation }) {
 
 
     const signinUser = () => {
-        
+        // console.log("signin user")
         setEmailError("");
         setPasswordError("");
 
@@ -30,6 +30,7 @@ export default function Singin({ navigation }) {
         } else if (!password) {
             setPasswordError("Password cannot be empty!");
         } else {
+            console.log("..");
             axios.post(`http://${IP_ADDRESS}:3001/signin`, {
                 email, password
             }).then(async (response) => {

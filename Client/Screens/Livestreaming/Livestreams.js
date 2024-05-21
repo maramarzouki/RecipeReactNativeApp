@@ -278,7 +278,7 @@ export default function Livestreams({ navigation }) {
     //     user_id: null
     // })
     // const [initialized, setInitialized] = useState(false)
-
+ 
     const fetchToken = async () => {
         try {
             const storedToken = await AsyncStorage.getItem('TOKEN');
@@ -286,25 +286,26 @@ export default function Livestreams({ navigation }) {
         } catch (error) {
             console.error('Error fetching token:', error);
             return null;
-        }
+        } 
     };
 
-    const showDialog = () => {
-        setVisible(true);
+    const showDialog = () => {  
+        setVisible(true); 
     };
-
-    const handleCancel = () => {
-        setVisible(false);
-    };
+ 
+    const handleCancel = () => {  
+        setVisible(false);  
+    }; 
 
     const handleCreate = async () => {
-        console.log("start live");
+        // console.log(".."); 
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const userID = decodedToken._id;
         const randomId = Math.floor(Math.random() * 1000000000).toString();
 
         try {
+            console.log("start live");
             axios.post(`http://${IP_ADDRESS}:3001/createLive`, {
                 liveTitle, liveID: randomId, liveOwner: userID
             })
@@ -326,6 +327,9 @@ export default function Livestreams({ navigation }) {
     };
 
     const getLives = async () => {
+        // console.log('====================================');
+        // console.log("");
+        // console.log('====================================');
         const token = await fetchToken();
         const decodedToken = jwtDecode(token);
         const userID = decodedToken._id;
@@ -345,6 +349,9 @@ export default function Livestreams({ navigation }) {
     };
 
     const fetchEmail = async () => {
+        // console.log('====================================');
+        // console.log("");
+        // console.log('====================================');
         try {
             const storedEmail = await AsyncStorage.getItem('email');
             console.log("fetching", storedEmail);
@@ -450,6 +457,7 @@ export default function Livestreams({ navigation }) {
     // }, [initialized, authState]);
 
     useEffect(() => {
+        // console.log("first")
         if (authState?.authenticated && authState.token) {
             const user = { id: authState.user_id };
             try {
